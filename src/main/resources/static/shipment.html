@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Shipment Search | visionIQ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shipment.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9901437252439097" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="page-transition-overlay" id="page-transition"></div>
+
+  <header class="top-nav">
+    <nav class="nav-inner">
+      <div class="brand-name">visionIQ</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="shipment.html" class="active">Track</a>
+        <a href="mailto:support@visioniq.ai">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <div class="bg-layer">
+      <div class="bg-gradient-overlay"></div>
+      <img alt="Cargo ship" class="bg-image"
+        src="assets/shipment_red_bg.png">
+    </div>
+
+    <div class="content-wrapper">
+      <div class="hero-text">
+        <h1 class="hero-heading">
+          Navigate the <span class="hero-accent">Indian Supply Chain</span>
+        </h1>
+        <p class="hero-subtext">
+          Precision logistics for modern India. Map your air, rail, and road routes with mathematical certainty.
+        </p>
+      </div>
+
+      <div class="search-card">
+        <form class="search-form">
+
+          <div class="form-group">
+            <label class="form-label">
+              <span class="material-symbols-outlined label-icon">location_on</span>
+              Pickup Location
+            </label>
+            <input class="form-input" id="originPincode" placeholder="Enter 6-digit origin pincode e.g. 110001" type="text" maxlength="6">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              <span class="material-symbols-outlined label-icon">location_on</span>
+              Delivery Location
+            </label>
+            <input class="form-input" id="destinationPincode" placeholder="Enter 6-digit destination pincode e.g. 400001" type="text" maxlength="6">
+          </div>
+
+          <div class="form-group form-group--full">
+            <label class="form-label">
+              <span class="material-symbols-outlined label-icon">speed</span>
+              Priority
+            </label>
+            <div class="custom-select-wrapper" id="priorityType" data-value="BALANCED">
+              <div class="custom-select-trigger" style="box-shadow: 0 4px 12px rgba(56, 0, 10, 0.08);">
+                <span class="custom-select-text" style="color: var(--color-on-surface); font-weight: 600;">BALANCED</span>
+                <span class="material-symbols-outlined select-arrow">keyboard_arrow_down</span>
+              </div>
+              <div class="custom-options-container">
+                <div class="custom-option" data-value="FASTEST">FASTEST</div>
+                <div class="custom-option selected" data-value="BALANCED">BALANCED</div>
+                <div class="custom-option" data-value="CHEAPEST">CHEAPEST</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group form-group--full">
+            <label class="form-label">
+              <span class="material-symbols-outlined label-icon">package</span>
+              Goods Type
+            </label>
+            <div class="custom-select-wrapper" id="cargoType">
+              <div class="custom-select-trigger">
+                <span class="custom-select-text">Select cargo category</span>
+                <span class="material-symbols-outlined select-arrow">keyboard_arrow_down</span>
+              </div>
+              <div class="custom-options-container">
+                <div class="custom-option" data-value="Commercial B2B & Bulk Freight">Commercial B2B &amp; Bulk Freight (FTL / PTL)</div>
+                <div class="custom-option" data-value="E-Commerce & Retail Small Parcels">E-Commerce &amp; Retail Small Parcels (B2C / D2C)</div>
+                <div class="custom-option" data-value="Household Shifting & Packers Movers">Household Shifting &amp; Packers Movers</div>
+                <div class="custom-option" data-value="Cold Chain, Exim & Special Cargo">Cold Chain, Exim &amp; Special Cargo</div>
+                <div class="custom-option" data-value="Electronics">Electronics &amp; Gadgets</div>
+                <div class="custom-option" data-value="Furniture">Furniture &amp; Home Relocation</div>
+                <div class="custom-option" data-value="Food & Perishables">Food &amp; Perishables</div>
+                <div class="custom-option" data-value="Machinery">Machinery &amp; Heavy Freight</div>
+                <div class="custom-option" data-value="Other">Other</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group form-group--full" id="customCargoGroup" style="display: none; margin-top: -1rem;">
+            <label class="form-label">
+              <span class="material-symbols-outlined label-icon">edit_note</span>
+              Describe Your Goods
+            </label>
+            <input class="form-input" id="customCargoType" placeholder="e.g. handmade pottery, lab equipment, art supplies" type="text" maxlength="80">
+          </div>
+
+          <div class="form-group form-group--full form-row-toggles">
+            <label class="toggle-label">
+              <span class="toggle-text">Fragile goods?</span>
+              <div class="toggle-switch">
+                <input type="checkbox" id="fragileToggle" class="toggle-input">
+                <span class="toggle-slider"></span>
+              </div>
+            </label>
+
+            <label class="toggle-label">
+              <span class="toggle-text">Perishable goods?</span>
+              <div class="toggle-switch">
+                <input type="checkbox" id="perishableToggle" class="toggle-input">
+                <span class="toggle-slider"></span>
+              </div>
+            </label>
+          </div>
+
+          <div class="form-group form-group--full form-submit">
+            <button class="btn-search" type="button" id="searchBtn">
+              Search Shipping Routes
+              <span class="material-symbols-outlined">anchor</span>
+            </button>
+          </div>
+
+        </form>
+
+        <div class="trust-indicators">
+          <div class="trust-item">
+            <span class="material-symbols-outlined">verified_user</span>
+            <span>Pan-India Compliance</span>
+          </div>
+          <div class="trust-item">
+            <span class="material-symbols-outlined">rocket_launch</span>
+            <span>Express Transit</span>
+          </div>
+          <div class="trust-item">
+            <span class="material-symbols-outlined">monitoring</span>
+            <span>Live Vessel Trace</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-name">visionIQ</div>
+        <div class="footer-copy">© 2026 visionIQ. All rights reserved.</div>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="compliance.html">Transport Law & Compliance</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        const overlay = document.getElementById('page-transition');
+        if(overlay) overlay.classList.add('hidden');
+      }, 50);
+
+
+      // Custom Select Logic
+      const selectWrappers = document.querySelectorAll('.custom-select-wrapper');
+      selectWrappers.forEach(selectWrapper => {
+        const selectTrigger = selectWrapper.querySelector('.custom-select-trigger');
+        const selectText = selectWrapper.querySelector('.custom-select-text');
+        const options = selectWrapper.querySelectorAll('.custom-option');
+        
+        selectTrigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          // Close others
+          selectWrappers.forEach(other => {
+            if(other !== selectWrapper) other.classList.remove('open');
+          });
+          selectWrapper.classList.toggle('open');
+        });
+        
+        options.forEach(option => {
+          option.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selectText.textContent = option.textContent;
+            selectWrapper.dataset.value = option.dataset.value;
+            selectText.style.color = 'var(--color-on-surface)';
+            selectText.style.fontWeight = '600';
+            selectWrapper.classList.remove('open');
+            
+            // Add active class to selected option
+            options.forEach(opt => opt.classList.remove('selected'));
+            option.classList.add('selected');
+
+            // Show/hide custom cargo input when "Other" is selected
+            if (selectWrapper.id === 'cargoType') {
+              const customGroup = document.getElementById('customCargoGroup');
+              const customInput = document.getElementById('customCargoType');
+              if (option.dataset.value === 'Other') {
+                customGroup.style.display = 'flex';
+                customInput.focus();
+              } else {
+                customGroup.style.display = 'none';
+                customInput.value = '';
+              }
+            }
+          });
+        });
+      });
+        
+      // Close custom select when clicking outside
+      document.addEventListener('click', (e) => {
+        selectWrappers.forEach(selectWrapper => {
+          if (!selectWrapper.contains(e.target)) {
+            selectWrapper.classList.remove('open');
+          }
+        });
+      });
+
+      // Search Button Animation and Navigation
+      const searchBtn = document.getElementById('searchBtn');
+      if (searchBtn) {
+        searchBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          // Save search data for results.html
+          const origin = document.getElementById('originPincode').value.trim();
+          const dest = document.getElementById('destinationPincode').value.trim();
+          const cargoWrapper = document.getElementById('cargoType');
+          let cargo = cargoWrapper ? cargoWrapper.dataset.value : '';
+          const customCargoInput = document.getElementById('customCargoType');
+          const customCargo = customCargoInput ? customCargoInput.value.trim() : '';
+          
+          const priorityWrapper = document.getElementById('priorityType');
+          const priority = priorityWrapper ? priorityWrapper.dataset.value : 'BALANCED';
+          const fragile = document.getElementById('fragileToggle').checked;
+          const perishable = document.getElementById('perishableToggle').checked;
+          
+          if (!origin || !dest || !cargo) {
+            alert('Please fill in all fields (Pickup Location, Delivery Location, and Goods Type) before searching.');
+            return;
+          }
+
+          // Validate custom cargo type when "Other" is selected
+          if (cargo === 'Other' && !customCargo) {
+            alert('Please describe your goods type when selecting "Other".');
+            customCargoInput.focus();
+            return;
+          }
+
+          // Use custom cargo type text for the API request when "Other" is selected
+          const effectiveCargo = cargo === 'Other' ? customCargo : cargo;
+          
+          sessionStorage.setItem('visioniqResult', JSON.stringify({ origin, destination: dest, cargoType: effectiveCargo, priority, fragile, perishable }));
+          sessionStorage.setItem('erlResult', JSON.stringify({
+            origin: origin,
+            destination: dest,
+            cargoType: effectiveCargo,
+            priority: priority,
+            fragile: fragile,
+            perishable: perishable
+          }));
+
+          const icon = searchBtn.querySelector('.material-symbols-outlined');
+          if (icon) {
+            const rect = icon.getBoundingClientRect();
+            
+            // 1. Create solid brand red expanding circle centered at the anchor icon
+            const circle = document.createElement('div');
+            circle.style.position = 'fixed';
+            circle.style.top = (rect.top + rect.height / 2) + 'px';
+            circle.style.left = (rect.left + rect.width / 2) + 'px';
+            circle.style.width = '10px';
+            circle.style.height = '10px';
+            circle.style.borderRadius = '50%';
+            circle.style.backgroundColor = '#2563EB';
+            circle.style.transform = 'translate(-50%, -50%) scale(1)';
+            circle.style.transition = 'transform 0.85s cubic-bezier(0.77, 0, 0.175, 1)';
+            circle.style.zIndex = '9998';
+            circle.style.pointerEvents = 'none';
+            document.body.appendChild(circle);
+
+            // 2. Create centered anchor icon clone
+            const clone = icon.cloneNode(true);
+            clone.style.position = 'fixed';
+            clone.style.top = rect.top + 'px';
+            clone.style.left = rect.left + 'px';
+            clone.style.width = rect.width + 'px';
+            clone.style.height = rect.height + 'px';
+            clone.style.margin = '0';
+            clone.style.zIndex = '9999';
+            clone.style.color = '#FFFFFF';
+            clone.style.display = 'flex';
+            clone.style.alignItems = 'center';
+            clone.style.justifyContent = 'center';
+            clone.style.transition = 'transform 0.85s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.85s ease';
+            clone.style.transformOrigin = 'center center';
+            clone.style.pointerEvents = 'none';
+            document.body.appendChild(clone);
+
+            // Hide original icon
+            icon.style.opacity = '0';
+
+            // Force reflow
+            void circle.offsetWidth;
+            void clone.offsetWidth;
+
+            // Calculate max viewport distance to guarantee 100% full screen coverage
+            const maxRadius = Math.hypot(
+              Math.max(rect.left, window.innerWidth - rect.left),
+              Math.max(rect.top, window.innerHeight - rect.top)
+            );
+            const scaleFactor = (maxRadius * 2.5) / 10;
+
+            // Expand red circle to 100% full screen coverage
+            circle.style.transform = `translate(-50%, -50%) scale(${scaleFactor})`;
+
+            // Center and scale anchor icon smoothly
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const moveX = centerX - (rect.left + rect.width / 2);
+            const moveY = centerY - (rect.top + rect.height / 2);
+            clone.style.transform = `translate(${moveX}px, ${moveY}px) scale(6) rotate(-360deg)`;
+
+            // Redirect smoothly once full 100% coverage is reached
+            setTimeout(() => {
+              window.location.href = 'results.html';
+            }, 850);
+          } else {
+            window.location.href = 'results.html';
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Route Results | visionIQ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shipment.css">
+  <link rel="stylesheet" href="results.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9901437252439097" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="page-transition-overlay" id="page-transition"></div>
+
+  <header class="top-nav">
+    <nav class="nav-inner">
+      <div class="brand-name">visionIQ</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="shipment.html">Track</a>
+        <a href="results.html" class="active">Results</a>
+      </div>
+      <div class="nav-actions">
+        <a href="shipment.html" style="text-decoration: none;">
+          <button class="btn-signin" style="background-color: var(--color-surface-container-high); color: var(--color-primary); display: flex; align-items: center; gap: 0.5rem; transition: transform 0.2s, box-shadow 0.2s;">
+            <span class="material-symbols-outlined" style="font-size: 16px;">arrow_back</span>
+            New Search
+          </button>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <div class="bg-layer">
+      <div class="bg-gradient-overlay"></div>
+      <img alt="Cargo ship background" class="bg-image" src="assets/shipment_red_bg.png">
+    </div>
+
+    <div class="results-content">
+      <!-- HERO STRIP -->
+      <div class="hero-strip">
+        <div class="route-pill">
+          <span class="material-symbols-outlined" style="font-size:18px">route</span>
+          <span id="routeLabel">Loading route...</span>
+        </div>
+        <h1 class="hero-heading">AI-Ranked <span class="hero-accent">Carrier Options</span></h1>
+        <p class="hero-sub">Gemini analyzed your cargo type and live logistics conditions to rank these carriers for your shipment.</p>
+      </div>
+
+      <!-- Summary bar -->
+      <div class="summary-bar" id="summaryBar" style="display:none">
+        <div class="summary-item">
+          <div class="summary-label">Origin</div>
+          <div class="summary-value" id="sumOrigin">—</div>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-item">
+          <div class="summary-label">Destination</div>
+          <div class="summary-value" id="sumDest">—</div>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-item">
+          <div class="summary-label">Cargo</div>
+          <div class="summary-value" id="sumCargo">—</div>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-item">
+          <div class="summary-label">Carriers</div>
+          <div class="summary-value" id="sumCount">—</div>
+        </div>
+      </div>
+      <div class="ai-brief" id="aiBrief" style="display:none"></div>
+
+      <!-- Loading -->
+      <div class="loading-state" id="loadingState">
+        <div class="truck-road">
+          <div class="truck-container">
+            <span class="material-symbols-outlined truck-icon">local_shipping</span>
+          </div>
+          <div class="road-line"></div>
+        </div>
+        <div class="loading-text">visionIQ is analyzing your route with Haversine spatial filtering &amp; Gemini AI...</div>
+      </div>
+
+      <!-- Carriers grid -->
+      <div class="carriers-grid" id="carriersGrid"></div>
+      
+      <p class="mock-data-warning" id="mockWarning" style="display:none;">
+        If no data location/destination has entered that means the result above are mock data but real time.
+      </p>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" style="position: relative; z-index: 20;">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-name">visionIQ</div>
+        <div class="footer-copy">© 2026 visionIQ. Powered by Gemini AI.</div>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="compliance.html">Transport Law & Compliance</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+      document.getElementById('page-transition').classList.add('hidden');
+    }, 50);
+    loadCarriers();
+  });
+
+  function getModeIcon(mode) {
+    const map = { Air: 'flight_takeoff', Road: 'local_shipping', Rail: 'train', Sea: 'directions_boat', Multi: 'hub' };
+    return map[mode] || 'local_shipping';
+  }
+
+  async function loadCarriers() {
+    const STORAGE_KEY = sessionStorage.getItem('visioniqResult') ? 'visioniqResult' : 'erlResult';
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+
+    if (!raw) {
+      window.location.href = 'shipment.html';
+      return;
+    }
+
+    let saved = {};
+    let origin = null;
+    let destination = null;
+    let cargoType = null;
+    let showWarning = false;
+
+    try {
+      saved = JSON.parse(raw);
+      origin = (saved.origin || '').trim();
+      destination = (saved.destination || '').trim();
+      cargoType = (saved.cargoType || '').trim();
+    } catch (err) {
+      console.error('Invalid session data:', err);
+    }
+
+    if (!origin || !destination || !cargoType) {
+      document.getElementById('loadingState').innerHTML =
+        '<div style="color:red;">No search data found. Please search again.</div>';
+      return;
+    }
+
+    // UI update
+    document.getElementById('routeLabel').textContent = origin + ' → ' + destination;
+    document.getElementById('sumOrigin').textContent = origin;
+    document.getElementById('sumDest').textContent = destination;
+    document.getElementById('sumCargo').textContent = cargoType;
+    document.getElementById('summaryBar').style.display = 'flex';
+
+    const apiUrl = resolveApiUrl();
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          origin: origin,
+          destination: destination,
+          cargoType: cargoType,
+          priority: saved.priority,
+          fragile: Boolean(saved.fragile),
+          perishable: Boolean(saved.perishable)
+        })
+      });
+
+      if (!response.ok) throw new Error();
+
+      const result = await response.json();
+      const carriers = Array.isArray(result.carriers) ? result.carriers : [];
+      if (carriers.length === 0) {
+           document.getElementById('carriersGrid').innerHTML =
+           '<div style="text-align:center; padding:2rem; color:var(--color-primary); font-weight:600;">No carriers found for this route.</div>';
+      return;
+      }
+      renderCarriers(carriers, showWarning, result.routeInsight || '', saved);
+
+    } catch (err) {
+      console.log("Using mock data (backend not responding)");
+      document.getElementById('loadingState').style.display = 'none';
+
+    const mockCarriers = [
+      {
+        name: "Bharat Air Express",
+        mode: "Air",
+        estimatedDays: 2,
+        costPerKg: 150,
+        riskScore: 10,
+        safetyGrade: "A",
+        aiReason: "Fastest option for high-value cargo.",
+        website: "https://example.com/air-express"
+      },
+      {
+        name: "Indian Railways Freight",
+        mode: "Rail",
+        estimatedDays: 5,
+        costPerKg: 40,
+        riskScore: 20,
+        safetyGrade: "A",
+        aiReason: "Reliable and stable logistics.",
+        website: "https://example.com/rail-freight"
+      }
+    ];
+
+      showWarning = true;
+      renderCarriers(mockCarriers, showWarning, 'Backend unavailable, showing fallback carrier options.', saved);
+    }
+  }
+
+  function renderCarriers(carriers, showWarning, routeInsight, saved) {
+    const grid = document.getElementById('carriersGrid');
+    grid.innerHTML = '';
+    const oldInsight = document.getElementById('routeInsightBox');
+    if (oldInsight) oldInsight.remove();
+
+    if (routeInsight) {
+      const insightDiv = document.createElement('div');
+      insightDiv.id = 'routeInsightBox';
+
+      insightDiv.style.margin = '1rem 0';
+      insightDiv.style.padding = '1rem';
+      insightDiv.style.background = 'rgba(0,0,0,0.05)';
+      insightDiv.style.borderRadius = '10px';
+      insightDiv.style.fontWeight = '600';
+
+      insightDiv.innerText = "AI Insight: " + routeInsight;
+
+      document.querySelector('.results-content').prepend(insightDiv);
+    }
+
+    const aiBrief = document.getElementById('aiBrief');
+    const top = carriers[0] || {};
+    const priority = (saved?.priority || '').toLowerCase();
+    const cargo = saved?.cargoType || 'cargo';
+    const handlingNotes = [];
+    if (saved?.fragile) handlingNotes.push('shock-safe handling');
+    if (saved?.perishable) handlingNotes.push('temperature control');
+    const handlingText = handlingNotes.length ? ` Special handling: ${handlingNotes.join(' + ')}.` : '';
+    const priorityText = priority ? `Priority mode: ${priority}. ` : '';
+    aiBrief.textContent = `AI Route Brief: ${priorityText}Top recommendation is ${top.name || 'the leading carrier'} via ${top.mode || 'the suggested mode'} (~${top.estimatedDays || '?'} days). ${cargo} lanes are ranked by ETA, cost per kg, and risk score.${handlingText}`;
+    aiBrief.style.display = 'block';
+
+    document.getElementById('loadingState').style.display = 'none';
+    const displayCarriers = carriers.slice(0, 10);
+    document.getElementById('sumCount').textContent = displayCarriers.length + ' carriers';
+    displayCarriers.forEach((carrier, index) => {
+      const rank = index + 1;
+
+      const card = document.createElement('div');
+      card.className = 'carrier-card';
+
+      card.innerHTML = `
+        <div class="rank-badge">#${rank}</div>
+
+        <div class="mode-img-wrapper">
+          <span class="material-symbols-outlined mode-icon">${getModeIcon(carrier.mode)}</span>
+        </div>
+
+        <div class="card-center">
+          <div class="carrier-name">${carrier.name}</div>
+
+          <div class="card-stats">
+            <div class="stat-item">
+              <div class="stat-label">Mode</div>
+              <div class="stat-value">${carrier.mode}</div>
+            </div>
+
+            <div class="stat-item">
+              <div class="stat-label">Transit</div>
+              <div class="stat-value">${carrier.estimatedDays} Days</div>
+            </div>
+
+            <div class="stat-item">
+              <div class="stat-label">Cost</div>
+              <div class="stat-value">₹${carrier.costPerKg}/kg</div>
+            </div>
+
+            <div class="stat-item">
+              <div class="stat-label">Grade</div>
+              <div class="stat-value">${carrier.grade || carrier.safetyGrade || 'N/A'}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-right">
+          <div class="ai-reason">"${carrier.aiInsight || carrier.aiReason || routeInsight || 'No AI insight available.'}"</div>
+
+          <div style="display:flex; gap:0.6rem; justify-content:flex-end; flex-wrap:wrap;">
+            <button class="btn-select" onclick="selectCarrier('${encodeURIComponent(JSON.stringify(carrier))}')">
+              Select Route
+            </button>
+          </div>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    if (showWarning) {
+      document.getElementById('mockWarning').style.display = 'block';
+    } else {
+      document.getElementById('mockWarning').style.display = 'none';
+    }
+  }
+
+  function selectCarrier(carrierStr) {
+    sessionStorage.setItem('visioniqSelectedCarrier', decodeURIComponent(carrierStr)); sessionStorage.setItem('erlSelectedCarrier', decodeURIComponent(carrierStr));
+    const overlay = document.getElementById('page-transition');
+    overlay.classList.remove('hidden');
+    overlay.classList.add('active');
+
+    setTimeout(() => {
+      window.location.href = 'details.html';
+    }, 500);
+  }
+
+
+
+function resolveApiUrl() {
+  const host = window.location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1') {
+    return '/api/route/analyze';
+  }
+  return '/api/route/analyze';
+}
+
+   </script>
+  <style>
+    @keyframes spin { 100% { transform: rotate(-360deg); } }
+  </style>
+</body>
+</html>
