@@ -4,164 +4,247 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>visionIQ | Smart India Logistics</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
+    <title>visionIQ | AI-Powered Multi-Modal Logistics Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9901437252439097" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="page-transition-overlay" id="page-transition"></div>
 
-    <!-- TopNavBar -->
+    <!-- Glassmorphic Top Navigation -->
     <nav class="top-nav">
-        <div class="brand-name">visionIQ</div>
+        <a href="index.html" class="brand-wrapper">
+            <div class="brand-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+            </div>
+            <div class="brand-text">
+                vision<span class="iq-badge">IQ</span>
+                <span class="brand-tag">AI Logistics</span>
+            </div>
+        </a>
         <div class="nav-links">
             <a href="index.html" class="nav-link active">Home</a>
-            <a href="shipment.html" class="nav-link">Track</a>
-            <a href="mailto:support@visioniq.ai" class="nav-link">Contact</a>
+            <a href="#architecture" class="nav-link">Architecture</a>
+            <a href="shipment.html" class="nav-link">Search Routes</a>
+            <a href="compliance.html" class="nav-link">Compliance</a>
+            <a href="shipment.html" class="nav-cta">
+                <span class="material-symbols-outlined" style="font-size: 18px;">rocket_launch</span>
+                Launch Engine
+            </a>
         </div>
     </nav>
 
-    <main class="main-content">
-
+    <main>
         <!-- Hero Section -->
         <section class="hero-section">
-            <div class="hero-bg">
-                <img class="hero-img" src="assets/hero_red_transport.png" alt="Global shipping cinematic composite" />
-                <div class="hero-overlay"></div>
+            <div class="hero-pill">
+                <span class="pulse-dot"></span>
+                <span>Hybrid Spatial Algorithms + Google Gemini Reasoning</span>
             </div>
-            <div class="hero-content">
-            <h1 class="hero-heading">
-                Find the Best Shipping Option in Seconds
+
+            <h1 class="hero-title">
+                Intelligent Freight Decisions, <br>
+                <span class="gradient-text">Engineered for Precision.</span>
             </h1>
 
             <p class="hero-subtext">
-                Compare multiple logistics providers, prices, and delivery times —
-                powered by real-time scoring and AI insights.
+                visionIQ automates the complex multi-modal logistics matrix across India. By pairing Java Haversine spatial calculations with Google Gemini intelligence, it instantly ranks carriers for cost, delivery speed, and cargo vulnerability.
             </p>
+
+            <div class="hero-actions">
+                <a href="shipment.html" class="btn-primary-hero">
+                    <span class="material-symbols-outlined">route</span>
+                    Analyze Shipping Route
+                </a>
+                <a href="#architecture" class="btn-secondary-hero">
+                    <span class="material-symbols-outlined">psychology</span>
+                    How Hybrid AI Works
+                </a>
+            </div>
+
+            <!-- Interactive Hero Showcase Widget -->
+            <div class="hero-showcase">
+                <div class="showcase-header">
+                    <div class="showcase-title">
+                        <span class="material-symbols-outlined" style="color: #06B6D4;">hub</span>
+                        <span>Flagship Benchmark: Bhopal (462001) → Delhi (110001)</span>
+                    </div>
+                    <span class="showcase-badge">Execution: 380ms (Sub-Second Flow)</span>
+                </div>
+
+                <div class="showcase-grid">
+                    <div class="showcase-stat-box">
+                        <div class="stat-label">Spatial Funnel</div>
+                        <div class="stat-value">
+                            <span class="stat-highlight">103 → 4</span> Hubs
+                        </div>
+                    </div>
+                    <div class="showcase-stat-box">
+                        <div class="stat-label">AI Cargo Resolution</div>
+                        <div class="stat-value">
+                            <span class="stat-highlight">Fragile Art</span>
+                        </div>
+                    </div>
+                    <div class="showcase-stat-box">
+                        <div class="stat-label">OpenWeather Radar</div>
+                        <div class="stat-value">
+                            <span class="stat-highlight">Clear, 28°C</span>
+                        </div>
+                    </div>
+                    <div class="showcase-stat-box">
+                        <div class="stat-label">Top Ranked Carrier</div>
+                        <div class="stat-value">
+                            <span class="stat-highlight">Air Express</span> (Grade A+)
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section class="features-section" id="features">
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <span class="material-symbols-outlined">public</span>
-                    </div>
-                    <h3 class="feature-title">AI Route Scoring</h3>
-                    <p class="feature-text">Each carrier is ranked using cost, ETA, weather risk, and cargo sensitivity.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <span class="material-symbols-outlined">location_searching</span>
-                    </div>
-                    <h3 class="feature-title">Risk Intelligence</h3>
-                    <p class="feature-text">AI-generated risk scores highlight delays, damage probability, and route reliability..</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <span class="material-symbols-outlined">verified_user</span>
-                    </div>
-                    <h3 class="feature-title">Carrier Comparison</h3>
-                    <p class="feature-text">Compare multiple logistics providers in one request — no manual searching.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <span class="material-symbols-outlined">speed</span>
-                    </div>
-                    <h3 class="feature-title">Explainable AI</h3>
-                    <p class="feature-text">Every recommendation includes human-readable AI insights.</p>
-                </div>
-
+        <!-- Metrics Ribbon -->
+        <div class="metrics-ribbon">
+            <div class="metric-item">
+                <div class="metric-number">&lt;500ms</div>
+                <div class="metric-text">Route Analysis Latency</div>
             </div>
-        </section>
+            <div class="metric-item">
+                <div class="metric-number">100+</div>
+                <div class="metric-text">Mapped Indian Hubs</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-number">4 Modes</div>
+                <div class="metric-text">Air, Rail, Road, Coastal Sea</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-number">0% Hallucination</div>
+                <div class="metric-text">Deterministic Spatial Funnel</div>
+            </div>
+        </div>
 
-        <!-- About Section -->
-        <section class="about-section" id="about">
-            <div class="about-inner">
-                <div class="about-text">
-                    <h2 class="about-heading">Reliable Transport Solutions for a Modern India</h2>
-                    <p class="about-body">
-                        visionIQ has pioneered the art of national transport through a blend of
-                        robust infrastructure and cutting-edge AI. Our network spans from Kashmir to Kanyakumari, managed by a team that views logistics as a precision instrument.
+        <!-- Architecture & Features Section -->
+        <section class="section-wrapper" id="architecture">
+            <div style="text-align: center;">
+                <span class="section-tag">System Architecture</span>
+                <h2 class="section-title">The Hybrid AI Advantage</h2>
+                <p class="section-desc" style="margin-left: auto; margin-right: auto;">
+                    visionIQ rejects unconstrained LLM calls. Deterministic mathematical filters protect against hallucinations and slashes latency from 120 seconds to sub-second responses.
+                </p>
+            </div>
+
+            <div class="architecture-grid">
+                <div class="arch-card">
+                    <span class="arch-step-badge">STEP 01</span>
+                    <div class="arch-icon-box">
+                        <span class="material-symbols-outlined">explore</span>
+                    </div>
+                    <h3 class="arch-card-title">Haversine Spatial Filtering</h3>
+                    <p class="arch-card-desc">
+                        Java-based spatial algorithms compute great-circle distances across 100+ cities to isolate 3–5 viable transit candidates prior to any AI invocation.
                     </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="stat-number">AI-Ranked</span>
-                            <span class="stat-label">Carrier Selection</span>
-                        </div>
-                        <div class="stat-divider"></div>
-                        <div class="stat">
-                            <span class="stat-number">4+</span>
-                            <span class="stat-label">Transport Modes</span>
-                        </div>
-                    </div>
                 </div>
-                <div class="about-image-wrapper">
-                    <div class="about-image-frame">
-                        <img class="about-image" src="assets/about_red_terminal.png" alt="Modern container terminal" />
+
+                <div class="arch-card">
+                    <span class="arch-step-badge">STEP 02</span>
+                    <div class="arch-icon-box" style="color: #A855F7; border-color: rgba(168, 85, 247, 0.4); background: rgba(168, 85, 247, 0.1);">
+                        <span class="material-symbols-outlined">psychology</span>
                     </div>
-                    <div class="about-image-decoration"></div>
+                    <h3 class="arch-card-title">Gemini Cargo Classification</h3>
+                    <p class="arch-card-desc">
+                        Custom cargo declarations (e.g. <em>"Handmade Rajasthani Blue Pottery"</em>) are contextually parsed by Gemini to assign proper transport packaging requirements.
+                    </p>
+                </div>
+
+                <div class="arch-card">
+                    <span class="arch-step-badge">STEP 03</span>
+                    <div class="arch-icon-box" style="color: #38BDF8; border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.1);">
+                        <span class="material-symbols-outlined">cloud_sync</span>
+                    </div>
+                    <h3 class="arch-card-title">Live Weather Radar</h3>
+                    <p class="arch-card-desc">
+                        Real-time OpenWeather telemetry along transit corridor stops identifies localized disruptions, rain hazards, and seasonal transit delays.
+                    </p>
+                </div>
+
+                <div class="arch-card">
+                    <span class="arch-step-badge">STEP 04</span>
+                    <div class="arch-icon-box" style="color: #10B981; border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.1);">
+                        <span class="material-symbols-outlined">tune</span>
+                    </div>
+                    <h3 class="arch-card-title">Multi-Objective Carrier Ranking</h3>
+                    <p class="arch-card-desc">
+                        Deterministic scoring formulas balance Speed, Reliability, Cost, and Risk Score to present transparent, explainable recommendations.
+                    </p>
                 </div>
             </div>
         </section>
 
         <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="cta-card">
-                <div class="cta-blob cta-blob--top"></div>
-                <div class="cta-blob cta-blob--bottom"></div>
-                <div class="cta-content">
-                    <h2 class="cta-heading">Ready to Ship Your Goods?</h2>
-                    <p class="cta-subtext">
-                        Calculate your freight rates instantly and find the most efficient route
-                        for your domestic cargo.
-                    </p>
-                    <button class="btn-cta">
-                        Compare Shipping Options Instantly
-                        <span class="material-symbols-outlined cta-arrow">arrow_forward</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-
+        <div class="cta-banner">
+            <h2 class="cta-banner-title">Ready to Optimize Your Logistics Route?</h2>
+            <p class="cta-banner-desc">
+                Input your origin, destination, and cargo parameters to experience the visionIQ decision engine in action.
+            </p>
+            <a href="shipment.html" class="btn-primary-hero">
+                <span class="material-symbols-outlined">play_arrow</span>
+                Start Route Analysis
+            </a>
+        </div>
     </main>
 
     <!-- Footer -->
     <footer class="site-footer">
-        <div class="footer-grid">
-            <div class="footer-about">
-                <div class="footer-brand">visionIQ</div>
-                <p class="footer-tagline">Optimizing logistics across India with AI.</p>
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div>
+                    <div class="brand-wrapper" style="margin-bottom: 1rem;">
+                        <div class="brand-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            </svg>
+                        </div>
+                        <div class="brand-text">
+                            vision<span class="iq-badge">IQ</span>
+                        </div>
+                    </div>
+                    <p class="footer-desc">
+                        AI-Powered Multi-Modal Logistics Decision-Support Platform. Engineered as a 4th-Year Major Project.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Product</h4>
+                    <ul class="footer-list">
+                        <li><a href="shipment.html" class="footer-link">Analyze Route</a></li>
+                        <li><a href="#architecture" class="footer-link">Hybrid AI Architecture</a></li>
+                        <li><a href="shipment.html" class="footer-link">Carrier Portal</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Compliance</h4>
+                    <ul class="footer-list">
+                        <li><a href="compliance.html" class="footer-link">Transport Law & CMVR</a></li>
+                        <li><a href="privacy.html" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="footer-link">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Academic</h4>
+                    <ul class="footer-list">
+                        <li><span class="footer-link" style="color: #94A3B8;">4th Year Major Project</span></li>
+                        <li><span class="footer-link" style="color: #94A3B8;">Google Solution Challenge</span></li>
+                        <li><a href="mailto:support@visioniq.ai" class="footer-link">support@visioniq.ai</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-col">
-                <div class="footer-col-title">Company</div>
-                <a href="#about" class="footer-link">Pan-India Network</a>
-                <a href="#features" class="footer-link">Sustainability</a>
+            <div class="footer-bottom">
+                <p>© 2026 visionIQ. Powered by Google Gemini AI &amp; Java 21 Spring Boot.</p>
+                <p>Designed for High-Performance Multi-Modal Freight Optimization.</p>
             </div>
-            <div class="footer-col">
-                <div class="footer-col-title">Portals</div>
-                <a href="shipment.html" class="footer-link">Carrier Portal</a>
-                <a href="shipment.html" class="footer-link">Track Shipment</a>
-            </div>
-            <div class="footer-col">
-                <div class="footer-col-title">Legal & Compliance</div>
-                <a href="privacy.html" class="footer-link">Privacy Policy</a>
-                <a href="terms.html" class="footer-link">Terms of Service</a>
-                <a href="compliance.html" class="footer-link">Transport Law & Compliance</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 visionIQ. All rights reserved.</p>
         </div>
     </footer>
 
@@ -170,31 +253,8 @@
             setTimeout(() => {
                 const overlay = document.getElementById('page-transition');
                 if (overlay) overlay.classList.add('hidden');
-            }, 50);
-        });
-
-        const searchBtn = document.querySelector('.btn-cta');
-        if (searchBtn) {
-            searchBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const transitionOverlay = document.getElementById('page-transition');
-                transitionOverlay.classList.remove('hidden');
-                transitionOverlay.classList.add('active');
-
-                setTimeout(() => {
-                    window.location.href = 'shipment.html';
-                }, 400);
-            });
-        }
-
-        window.addEventListener('pageshow', (event) => {
-            if (event.persisted) {
-                const transitionOverlay = document.getElementById('page-transition');
-                transitionOverlay.classList.remove('active');
-                transitionOverlay.classList.add('hidden');
-            }
+            }, 60);
         });
     </script>
 </body>
-
 </html>

@@ -1,51 +1,51 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Transport Law & Pan-India Compliance | visionIQ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Transport Law &amp; Pan-India Compliance | visionIQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="shipment.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9901437252439097" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
   <style>
     .legal-container {
       max-width: 900px;
       margin: 3rem auto 5rem;
       padding: 2.5rem;
-      background: #FFFFFF;
-      border-radius: 1.5rem;
-      border: 1px solid #E2E8F0;
-      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-glass);
+      backdrop-filter: var(--blur-glass);
+      box-shadow: var(--shadow-card);
     }
     .legal-title {
-      font-family: var(--font-headline);
       font-size: 2.25rem;
       font-weight: 800;
-      color: var(--color-primary);
+      color: #FFFFFF;
       margin-bottom: 0.5rem;
     }
     .legal-updated {
       font-size: 0.875rem;
-      color: var(--color-on-surface-variant);
+      color: var(--text-muted);
       margin-bottom: 2rem;
       padding-bottom: 1rem;
-      border-bottom: 1px solid #E2E8F0;
+      border-bottom: 1px solid var(--border-subtle);
     }
     .legal-section {
       margin-bottom: 2rem;
     }
     .legal-section h2 {
-      font-family: var(--font-headline);
       font-size: 1.25rem;
       font-weight: 700;
-      color: var(--color-on-surface);
+      color: #38BDF8;
       margin-bottom: 0.75rem;
     }
     .legal-section p, .legal-section li {
       font-size: 0.95rem;
       line-height: 1.7;
-      color: #334155;
+      color: #CBD5E1;
       margin-bottom: 0.75rem;
     }
     .legal-section ul {
@@ -57,20 +57,28 @@
   <div class="page-transition-overlay" id="page-transition"></div>
 
   <header class="top-nav">
-    <nav class="nav-inner">
-      <div class="brand-name">visionIQ</div>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="shipment.html">Track</a>
-        <a href="mailto:support@visioniq.ai">Contact</a>
+    <a href="index.html" class="brand-wrapper">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
       </div>
-    </nav>
+      <div class="brand-text">
+        vision<span class="iq-badge">IQ</span>
+        <span class="brand-tag">Compliance</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="shipment.html" class="nav-link">Search Routes</a>
+      <a href="compliance.html" class="nav-link active">Compliance</a>
+    </div>
   </header>
 
-  <main class="main-content" style="padding-top: 7rem;">
+  <main class="main-content" style="padding-top: 6.5rem;">
     <div class="legal-container">
-      <h1 class="legal-title">Transport Law & Pan-India Compliance</h1>
-      <div class="legal-updated">Regulatory Framework & Interstate Standards | visionIQ</div>
+      <h1 class="legal-title">Transport Law &amp; Pan-India Compliance</h1>
+      <div class="legal-updated">Regulatory Framework &amp; Interstate Standards | visionIQ</div>
 
       <div class="legal-section">
         <h2>1. Statutory Regulatory Alignment</h2>
@@ -78,41 +86,40 @@
       </div>
 
       <div class="legal-section">
-        <h2>2. Goods & Services Tax (GST) & e-Way Bill Standard</h2>
+        <h2>2. Goods &amp; Services Tax (GST) &amp; e-Way Bill Standards</h2>
         <p>All interstate B2B, cold chain, and bulk freight carriers benchmarked on our platform comply with mandatory e-Way Bill documentation required for commercial consignments exceeding ₹50,000 across Indian states.</p>
       </div>
 
       <div class="legal-section">
         <h2>3. Specialized Cargo Handling Guidelines</h2>
-        <p>Our scoring algorithm applies automated risk penalties based on regulatory handling norms:</p>
+        <p>Our scoring algorithm applies automated risk modifiers based on regulatory handling norms:</p>
         <ul>
-          <li><strong>Perishable & Cold Chain Freight:</strong> Adherence to food safety and temperature control protocols (FSSAI guidelines).</li>
-          <li><strong>Hazardous & Fragile Consignments:</strong> Mandatory shock-safe packaging and transport vehicle compliance according to Motor Vehicles Act safety standards.</li>
+          <li><strong>Perishable &amp; Cold Chain Freight:</strong> Strict adherence to food safety and temperature control protocols (FSSAI guidelines).</li>
+          <li><strong>Hazardous &amp; Fragile Consignments:</strong> Mandatory shock-safe packaging and transport vehicle compliance according to Motor Vehicles Act safety standards.</li>
         </ul>
       </div>
 
       <div class="legal-section">
-        <h2>4. Environmental & Transit Safety</h2>
-        <p>We promote eco-friendly modal shifts (Rail and Multi-modal B2B transit) to reduce carbon emissions across national transport corridors.</p>
+        <h2>4. Environmental &amp; Transit Safety</h2>
+        <p>We promote eco-friendly modal shifts (Dedicated Freight Rail and Multi-modal B2B transit) to reduce carbon emissions across national transport corridors.</p>
       </div>
 
       <div class="legal-section">
         <h2>5. Compliance Inquiries</h2>
-        <p>For transport compliance inquiries, contact our legal desk at <a href="mailto:compliance@visioniq.ai">compliance@visioniq.ai</a>.</p>
+        <p>For transport compliance inquiries, contact our legal desk at <a href="mailto:compliance@visioniq.ai" style="color: #06B6D4;">compliance@visioniq.ai</a>.</p>
       </div>
     </div>
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="footer-brand-name">visionIQ</div>
-        <div class="footer-copy">© 2026 visionIQ. All rights reserved.</div>
-      </div>
-      <div class="footer-links">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="compliance.html">Transport Law & Compliance</a>
+    <div class="footer-inner" style="text-align: center;">
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+        © 2026 visionIQ — AI Multi-Modal Logistics Decision-Support Platform.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 1.5rem; font-size: 0.8rem; color: var(--text-subtle);">
+        <a href="privacy.html" class="footer-link">Privacy Policy</a>
+        <a href="terms.html" class="footer-link">Terms of Service</a>
+        <a href="compliance.html" class="footer-link">Transport Law &amp; CMVR</a>
       </div>
     </div>
   </footer>

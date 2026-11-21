@@ -1,55 +1,52 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Terms of Service | visionIQ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="shipment.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9901437252439097" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
   <style>
     .legal-container {
       max-width: 900px;
       margin: 3rem auto 5rem;
       padding: 2.5rem;
-      background: #FFFFFF;
-      border-radius: 1.5rem;
-      border: 1px solid #E2E8F0;
-      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-glass);
+      backdrop-filter: var(--blur-glass);
+      box-shadow: var(--shadow-card);
     }
     .legal-title {
-      font-family: var(--font-headline);
       font-size: 2.25rem;
       font-weight: 800;
-      color: var(--color-primary);
+      color: #FFFFFF;
       margin-bottom: 0.5rem;
     }
     .legal-updated {
       font-size: 0.875rem;
-      color: var(--color-on-surface-variant);
+      color: var(--text-muted);
       margin-bottom: 2rem;
       padding-bottom: 1rem;
-      border-bottom: 1px solid #E2E8F0;
+      border-bottom: 1px solid var(--border-subtle);
     }
     .legal-section {
       margin-bottom: 2rem;
     }
     .legal-section h2 {
-      font-family: var(--font-headline);
       font-size: 1.25rem;
       font-weight: 700;
-      color: var(--color-on-surface);
+      color: #38BDF8;
       margin-bottom: 0.75rem;
     }
     .legal-section p, .legal-section li {
       font-size: 0.95rem;
       line-height: 1.7;
-      color: #334155;
+      color: #CBD5E1;
       margin-bottom: 0.75rem;
-    }
-    .legal-section ul {
-      padding-left: 1.5rem;
     }
   </style>
 </head>
@@ -57,63 +54,65 @@
   <div class="page-transition-overlay" id="page-transition"></div>
 
   <header class="top-nav">
-    <nav class="nav-inner">
-      <div class="brand-name">visionIQ</div>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="shipment.html">Track</a>
-        <a href="mailto:support@visioniq.ai">Contact</a>
+    <a href="index.html" class="brand-wrapper">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
       </div>
-    </nav>
+      <div class="brand-text">
+        vision<span class="iq-badge">IQ</span>
+        <span class="brand-tag">Terms</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="shipment.html" class="nav-link">Search Routes</a>
+      <a href="terms.html" class="nav-link active">Terms</a>
+    </div>
   </header>
 
-  <main class="main-content" style="padding-top: 7rem;">
+  <main class="main-content" style="padding-top: 6.5rem;">
     <div class="legal-container">
       <h1 class="legal-title">Terms of Service</h1>
-      <div class="legal-updated">Last Updated: July 2026 | visionIQ</div>
+      <div class="legal-updated">Last Updated: November 2026 | visionIQ Platform</div>
 
       <div class="legal-section">
-        <h2>1. Agreement to Terms</h2>
-        <p>By accessing or using the visionIQ web application, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.</p>
+        <h2>1. Platform Agreement</h2>
+        <p>By accessing or utilizing the visionIQ web application and decision-support services, you acknowledge and agree to these Terms of Service. visionIQ operates as an intelligent multi-modal route decision and ranking engine.</p>
       </div>
 
       <div class="legal-section">
-        <h2>2. Description of Platform Services</h2>
-        <p>visionIQ provides an AI-driven logistics aggregator and carrier ranking engine across India. Our algorithm processes user inputs (origin, destination, cargo category, priority) and returns carrier recommendations based on benchmarked cost, transit time, mode suitability, and weather forecasts.</p>
+        <h2>2. Scope of Services</h2>
+        <p>visionIQ benchmarks logistics providers across India by processing user origin, destination, cargo classifications, and route weather feeds to evaluate multi-objective transport options across Air, Rail, Road, and Sea.</p>
       </div>
 
       <div class="legal-section">
-        <h2>3. Disclaimer of Carrier Rates & Transit Times</h2>
-        <p>Carrier estimates, costs per kilogram, transit durations, and safety grades displayed on visionIQ are calculated for comparative evaluation purposes based on market benchmarking. visionIQ is an independent information & route intelligence portal and is not a direct transport carrier unless explicitly booked through certified carrier portals.</p>
+        <h2>3. Carrier Rates &amp; Performance Disclaimers</h2>
+        <p>Freight tariffs (₹/kg), transit turnaround times, safety grades, and hazard risk scores presented on visionIQ are generated through algorithm benchmarking and AI contextual insights. visionIQ serves as an independent route intelligence portal.</p>
       </div>
 
       <div class="legal-section">
-        <h2>4. User Responsibilities & Acceptable Use</h2>
-        <p>Users agree not to utilize automated web scraping bots, misrepresent freight declarations, or perform denial-of-service queries against our route analysis APIs.</p>
+        <h2>4. Acceptable Use</h2>
+        <p>Users agree to submit lawful cargo declarations and refrain from automated denial-of-service queries or malicious rate scraping against visionIQ API endpoints.</p>
       </div>
 
       <div class="legal-section">
-        <h2>5. Limitation of Liability</h2>
-        <p>visionIQ shall not be liable for indirect, incidental, or consequential damages resulting from carrier delay, weather disruptions, or road transit variances managed by third-party logistics providers.</p>
-      </div>
-
-      <div class="legal-section">
-        <h2>6. Contact & Legal Notices</h2>
-        <p>For legal inquiries, contact <a href="mailto:legal@visioniq.ai">legal@visioniq.ai</a>.</p>
+        <h2>5. Legal Inquiries</h2>
+        <p>For legal notices or inquiries, contact <a href="mailto:legal@visioniq.ai" style="color: #06B6D4;">legal@visioniq.ai</a>.</p>
       </div>
     </div>
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="footer-brand-name">visionIQ</div>
-        <div class="footer-copy">© 2026 visionIQ. All rights reserved.</div>
-      </div>
-      <div class="footer-links">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="compliance.html">Transport Law & Compliance</a>
+    <div class="footer-inner" style="text-align: center;">
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+        © 2026 visionIQ — AI Multi-Modal Logistics Decision-Support Platform.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 1.5rem; font-size: 0.8rem; color: var(--text-subtle);">
+        <a href="privacy.html" class="footer-link">Privacy Policy</a>
+        <a href="terms.html" class="footer-link">Terms of Service</a>
+        <a href="compliance.html" class="footer-link">Transport Law &amp; CMVR</a>
       </div>
     </div>
   </footer>
