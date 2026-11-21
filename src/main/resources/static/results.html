@@ -46,11 +46,11 @@
           <span class="material-symbols-outlined">route</span>
           <span id="routeLabel">Analyzing Corridor...</span>
         </div>
-        <h1 class="hero-title" style="font-size: clamp(2rem, 3.5vw, 2.75rem); margin-bottom: 0.5rem;">
-          Multi-Modal <span class="gradient-text">Carrier Recommendations</span>
+        <h1 class="hero-title" style="font-size: clamp(1.85rem, 3.5vw, 2.5rem); margin-bottom: 0.5rem;">
+          Multi-Modal <span class="accent-text">Carrier Recommendations</span>
         </h1>
         <p class="hero-subtext" style="margin-bottom: 1.5rem;">
-          Google Gemini evaluated route corridors, live weather hazards, and multi-objective trade-offs for your cargo.
+          Route corridors, weather conditions, and transport trade-offs evaluated for your consignment.
         </p>
       </div>
 
@@ -68,12 +68,12 @@
         <div class="summary-divider"></div>
         <div class="summary-item">
           <span class="summary-label">Cargo Profile</span>
-          <span class="summary-value" id="sumCargo" style="color: #38BDF8;">—</span>
+          <span class="summary-value" id="sumCargo" style="color: var(--color-primary);">—</span>
         </div>
         <div class="summary-divider"></div>
         <div class="summary-item">
           <span class="summary-label">Optimization Priority</span>
-          <span class="summary-value" id="sumPriority" style="color: #06B6D4;">BALANCED</span>
+          <span class="summary-value" id="sumPriority" style="color: var(--color-slate-900);">BALANCED</span>
         </div>
         <div class="summary-divider"></div>
         <div class="summary-item">
@@ -85,8 +85,8 @@
       <!-- Gemini AI Route Insight Card -->
       <div class="ai-brief" id="aiBrief" style="display: none;">
         <div class="ai-brief-header">
-          <span class="material-symbols-outlined">psychology</span>
-          <span>Google Gemini Route Reasoning &amp; Hazard Advisory</span>
+          <span class="material-symbols-outlined">analytics</span>
+          <span>Route Corridor Insight &amp; Environmental Advisory</span>
         </div>
         <div class="ai-brief-text" id="aiBriefText"></div>
       </div>
@@ -95,10 +95,10 @@
       <div class="corridor-timeline-card" id="corridorTimeline" style="display: none;">
         <div class="timeline-header">
           <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span class="material-symbols-outlined" style="font-size: 18px; color: #06B6D4;">cloud_sync</span>
-            <span>Real-Time Environmental Telemetry Along Transit Corridor:</span>
+            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--color-primary);">cloud_sync</span>
+            <span>Environmental Telemetry Along Transit Corridor:</span>
           </div>
-          <span style="font-size: 0.75rem; color: #38BDF8;">OpenWeather Feed Active</span>
+          <span style="font-size: 0.75rem; color: var(--color-slate-500);">OpenWeather Feed Active</span>
         </div>
         <div class="timeline-stops-row" id="timelineStopsRow"></div>
       </div>
@@ -353,7 +353,7 @@
               </div>
               <div>
                 <div class="carrier-name">${carrier.name}</div>
-                <div class="carrier-mode-badge">${carrier.mode} Freight ${isRecommended ? '• <span style="color:#06B6D4; font-weight:700;">Top Recommended</span>' : ''}</div>
+                <div class="carrier-mode-badge">${carrier.mode} Freight ${isRecommended ? '• <span style="color: var(--color-primary); font-weight:600;">Recommended</span>' : ''}</div>
               </div>
             </div>
             <span class="carrier-grade-badge ${gradeClass}">Grade ${carrier.safetyGrade || 'A'}</span>
@@ -366,16 +366,16 @@
             </div>
             <div class="carrier-metric-item">
               <span class="metric-item-label">Tariff</span>
-              <span class="metric-item-val" style="color: #06B6D4;">₹${carrier.costPerKg}/kg</span>
+              <span class="metric-item-val" style="color: var(--color-primary);">₹${carrier.costPerKg}/kg</span>
             </div>
             <div class="carrier-metric-item">
               <span class="metric-item-label">Risk Metric</span>
-              <span class="metric-item-val" style="color: ${carrier.riskScore < 20 ? '#10B981' : '#F59E0B'};">${carrier.riskScore ?? '15'} / 100</span>
+              <span class="metric-item-val" style="color: ${carrier.riskScore < 20 ? 'var(--color-success)' : 'var(--color-warning)'};">${carrier.riskScore ?? '15'} / 100</span>
             </div>
           </div>
 
           <div class="carrier-ai-reason">
-            <span class="material-symbols-outlined">auto_awesome</span>
+            <span class="material-symbols-outlined" style="color: var(--color-primary);">lightbulb</span>
             <span>${carrier.aiReason || 'Optimized for consignment parameters and route weather stability.'}</span>
           </div>
 

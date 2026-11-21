@@ -163,8 +163,8 @@
                 <span>Perishables</span>
               </div>
               <div class="cargo-category-btn" data-cargo="Other" onclick="selectCargo(this, 'Other')">
-                <span class="material-symbols-outlined" style="color: #A855F7;">auto_awesome</span>
-                <span style="color: #C4B5FD; font-weight: 700;">Custom AI...</span>
+                <span class="material-symbols-outlined">edit_note</span>
+                <span>Custom Cargo...</span>
               </div>
             </div>
             <input type="hidden" id="selectedCargoType" value="Electronics">
@@ -174,16 +174,16 @@
               <div class="custom-cargo-header">
                 <div class="ai-reasoning-badge">
                   <span class="material-symbols-outlined" style="font-size: 16px;">psychology</span>
-                  <span>Google Gemini Contextual Classifier</span>
+                  <span>Contextual Cargo Classifier (Gemini)</span>
                 </div>
-                <span style="font-size: 0.75rem; color: #94A3B8;">Freeform input accepted</span>
+                <span style="font-size: 0.75rem; color: var(--color-slate-500);">Natural language input</span>
               </div>
               <div class="input-container">
                 <input class="form-input" id="customCargoInput" placeholder="Describe goods e.g. Handmade Rajasthani Blue Pottery" type="text" maxlength="80">
-                <span class="material-symbols-outlined input-prefix-icon" style="color: #A855F7;">edit_note</span>
+                <span class="material-symbols-outlined input-prefix-icon">edit_note</span>
               </div>
               <div class="cargo-preset-pills">
-                <span style="font-size: 0.75rem; color: var(--text-subtle); align-self: center;">Try sample:</span>
+                <span style="font-size: 0.75rem; color: var(--color-slate-500); align-self: center;">Examples:</span>
                 <button type="button" class="cargo-preset-pill" onclick="setCustomCargo('Handmade Rajasthani Blue Pottery', true, false)">
                   🏺 Handmade Rajasthani Blue Pottery
                 </button>
@@ -204,7 +204,7 @@
                 <input type="checkbox" id="fragileToggle" class="toggle-input">
                 <span class="toggle-slider"></span>
               </div>
-              <span class="toggle-text">Fragile Consignment (Requires shock dampening)</span>
+              <span class="toggle-text">Fragile Consignment (Shock dampening required)</span>
             </label>
 
             <label class="toggle-label">
@@ -218,7 +218,7 @@
 
           <!-- Submit Button -->
           <button class="btn-search" type="button" id="searchBtn" onclick="processSearch()">
-            <span>Execute AI Route Decision Engine</span>
+            <span>Search Shipping Routes</span>
             <span class="material-symbols-outlined">arrow_forward</span>
           </button>
         </form>
@@ -226,15 +226,15 @@
         <div class="trust-indicators">
           <div class="trust-item">
             <span class="material-symbols-outlined">verified</span>
-            <span>Carriage by Road Act 2007 Compliant</span>
+            <span>Carriage by Road Act 2007</span>
           </div>
           <div class="trust-item">
             <span class="material-symbols-outlined">cloud_sync</span>
-            <span>Live OpenWeather Correlated</span>
+            <span>OpenWeather Telemetry Integrated</span>
           </div>
           <div class="trust-item">
-            <span class="material-symbols-outlined">memory</span>
-            <span>Deterministic Spatial Funnel</span>
+            <span class="material-symbols-outlined">speed</span>
+            <span>Spatial Candidate Funnel</span>
           </div>
         </div>
       </div>
