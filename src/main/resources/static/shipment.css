@@ -131,7 +131,7 @@
   gap: 1.25rem;
 }
 
-/* Two-column Row */
+/* Two-column Row or Connected Route Inputs */
 .form-row-2col {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -141,6 +141,55 @@
 @media (max-width: 680px) {
   .form-row-2col {
     grid-template-columns: 1fr;
+  }
+}
+
+.route-inputs-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.btn-swap-locations {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  color: var(--color-slate-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-xs);
+}
+
+.btn-swap-locations:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary-border);
+  transform: rotate(180deg);
+}
+
+@media (max-width: 680px) {
+  .route-inputs-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn-swap-locations {
+    align-self: center;
+    margin: -0.25rem 0;
+    transform: rotate(90deg);
+  }
+  .btn-swap-locations:hover {
+    transform: rotate(270deg);
   }
 }
 
@@ -210,16 +259,16 @@
 /* Autocomplete Dropdown */
 .autocomplete-dropdown {
   position: absolute;
-  top: calc(100% + 4px);
+  top: calc(100% + 6px);
   left: 0;
   right: 0;
   background: #FFFFFF;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  max-height: 240px;
+  max-height: 250px;
   overflow-y: auto;
   z-index: 1000;
-  box-shadow: var(--shadow-popover);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.12), 0 8px 10px -6px rgba(15, 23, 42, 0.08);
   display: none;
 }
 
@@ -228,7 +277,7 @@
 }
 
 .autocomplete-item {
-  padding: 0.65rem 0.9rem;
+  padding: 0.75rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -254,16 +303,17 @@
 .auto-city-state {
   font-size: 0.75rem;
   color: var(--color-slate-500);
+  margin-left: 0.35rem;
 }
 
 .auto-pincode-badge {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-primary-dark);
   background: var(--color-primary-light);
   border: 1px solid var(--color-primary-border);
-  padding: 0.12rem 0.45rem;
+  padding: 0.15rem 0.5rem;
   border-radius: var(--radius-xs);
 }
 
@@ -271,7 +321,7 @@
 .priority-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
 @media (max-width: 600px) {
@@ -281,33 +331,61 @@
 }
 
 .priority-card {
-  background: var(--bg-surface-subtle);
+  background: #FFFFFF;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 0.9rem 0.75rem;
+  padding: 1.1rem 0.85rem;
   cursor: pointer;
   text-align: center;
-  transition: all 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.35rem;
+  position: relative;
+  box-shadow: var(--shadow-xs);
+}
+
+.priority-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-slate-500);
+  background: var(--bg-surface-subtle);
+  border: 1px solid var(--border-color);
+  padding: 0.12rem 0.5rem;
+  border-radius: var(--radius-xs);
+  margin-bottom: 0.25rem;
+}
+
+.priority-badge.highlight {
+  color: var(--color-primary-dark);
+  background: #DBEAFE;
+  border-color: #BFDBFE;
 }
 
 .priority-card:hover {
   background: #FFFFFF;
   border-color: #CBD5E1;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 .priority-card.selected {
   background: var(--color-primary-light);
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 1px var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
 }
 
 .priority-icon {
-  font-size: 20px;
-  color: var(--color-slate-500);
+  font-size: 22px;
+  color: var(--color-slate-600);
+  transition: color 0.15s ease;
+}
+
+.priority-card.selected .priority-icon {
+  color: var(--color-primary);
 }
 
 .priority-card.selected .priority-icon {

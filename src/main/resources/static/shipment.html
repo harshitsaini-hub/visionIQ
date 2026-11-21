@@ -16,21 +16,28 @@
 
   <!-- Navigation -->
   <header class="top-nav">
-    <a href="index.html" class="brand-wrapper">
-      <div class="brand-icon">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        </svg>
+    <div class="nav-inner">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          vision<span class="iq-badge">IQ</span>
+          <span class="brand-tag">Freight Intelligence</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Overview</a>
+        <a href="index.html#architecture" class="nav-link">System Design</a>
+        <a href="shipment.html" class="nav-link active">Route Search</a>
+        <a href="compliance.html" class="nav-link">Compliance</a>
+        <a href="index.html" class="nav-cta">
+          <span class="material-symbols-outlined" style="font-size: 16px;">arrow_back</span>
+          Home Overview
+        </a>
       </div>
-      <div class="brand-text">
-        vision<span class="iq-badge">IQ</span>
-        <span class="brand-tag">Route Engine</span>
-      </div>
-    </a>
-    <div class="nav-links">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="shipment.html" class="nav-link active">Search Routes</a>
-      <a href="compliance.html" class="nav-link">Compliance</a>
     </div>
   </header>
 
@@ -76,10 +83,10 @@
       <div class="search-card">
         <form class="search-form" id="routeForm" onsubmit="return false;">
 
-          <!-- Origin & Destination Row with Autocomplete -->
-          <div class="form-row-2col">
+          <!-- Origin & Destination Row with Autocomplete & Interactive Swap -->
+          <div class="route-inputs-wrapper">
             <!-- Pickup Location -->
-            <div class="form-group">
+            <div class="form-group flex-1">
               <label class="form-label" for="originInput">
                 <span class="material-symbols-outlined label-icon">trip_origin</span>
                 Pickup Hub / Origin Pincode
@@ -93,8 +100,13 @@
               <div class="autocomplete-dropdown" id="originDropdown"></div>
             </div>
 
+            <!-- Interactive Swap Button -->
+            <button type="button" class="btn-swap-locations" onclick="swapLocations()" title="Swap Pickup and Delivery Hubs">
+              <span class="material-symbols-outlined">swap_horiz</span>
+            </button>
+
             <!-- Delivery Location -->
-            <div class="form-group">
+            <div class="form-group flex-1">
               <label class="form-label" for="destInput">
                 <span class="material-symbols-outlined label-icon">pin_drop</span>
                 Delivery Destination / Pincode
@@ -117,16 +129,19 @@
             </label>
             <div class="priority-cards-grid">
               <div class="priority-card" data-priority="FASTEST" onclick="selectPriority('FASTEST')">
+                <span class="priority-badge">Air Priority</span>
                 <span class="material-symbols-outlined priority-icon">bolt</span>
                 <div class="priority-title">FASTEST</div>
                 <div class="priority-sub">Prioritizes Air &amp; High-Speed Road corridors</div>
               </div>
               <div class="priority-card selected" data-priority="BALANCED" onclick="selectPriority('BALANCED')">
+                <span class="priority-badge highlight">Recommended</span>
                 <span class="material-symbols-outlined priority-icon">balance</span>
                 <div class="priority-title">BALANCED</div>
                 <div class="priority-sub">Optimal equilibrium of speed, cost &amp; safety</div>
               </div>
               <div class="priority-card" data-priority="CHEAPEST" onclick="selectPriority('CHEAPEST')">
+                <span class="priority-badge">Surface &amp; Rail</span>
                 <span class="material-symbols-outlined priority-icon">savings</span>
                 <div class="priority-title">CHEAPEST</div>
                 <div class="priority-sub">Maximizes cost-efficiency via Rail &amp; Surface</div>
@@ -322,6 +337,27 @@
           }
         }, 200);
       });
+    }
+
+    function swapLocations() {
+      const originInput = document.getElementById('originInput');
+      const destInput = document.getElementById('destInput');
+      const originPincode = document.getElementById('originPincode');
+      const destPincode = document.getElementById('destPincode');
+      const originCityName = document.getElementById('originCityName');
+      const destCityName = document.getElementById('destCityName');
+
+      const tempVal = originInput.value;
+      originInput.value = destInput.value;
+      destInput.value = tempVal;
+
+      const tempPin = originPincode.value;
+      originPincode.value = destPincode.value;
+      destPincode.value = tempPin;
+
+      const tempCity = originCityName.value;
+      originCityName.value = destCityName.value;
+      destCityName.value = tempCity;
     }
 
     function selectCityItem(inputId, pincodeId, cityNameId, dropdownId, city, pincode, state) {

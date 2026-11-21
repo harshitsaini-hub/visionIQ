@@ -1,16 +1,15 @@
 /* ============================================================
-   visionIQ — Clean, Sharp, Smooth Light Theme
-   (Executive Modern Freight SaaS Aesthetic)
+   visionIQ — Master Design System (Sharp, Smooth, Modern Light Theme)
    ============================================================ */
 :root {
   /* Surface & Backgrounds */
-  --bg-page:                 #F8FAFC; /* Soft clean slate */
+  --bg-page:                 #F8FAFC; /* Clean soft slate-50 */
   --bg-surface:              #FFFFFF; /* Pure crisp white */
-  --bg-surface-subtle:       #F1F5F9; /* Subtle off-white / gray */
+  --bg-surface-subtle:       #F1F5F9; /* Slate-100 */
   --bg-surface-elevated:     #FFFFFF;
 
-  /* Brand & Accents — Sharp Cobalt & Deep Slate */
-  --color-primary:           #2563EB; /* Premium Cobalt Blue */
+  /* Brand Accents — Sharp Royal Cobalt & Deep Obsidian */
+  --color-primary:           #2563EB; /* Royal Cobalt Blue */
   --color-primary-dark:      #1D4ED8;
   --color-primary-light:     #EFF6FF;
   --color-primary-border:    #BFDBFE;
@@ -21,17 +20,22 @@
   --color-slate-600:         #475569;
   --color-slate-500:         #64748B;
   --color-slate-400:         #94A3B8;
+  --color-slate-300:         #CBD5E1;
   --color-slate-200:         #E2E8F0;
   --color-slate-100:         #F1F5F9;
 
   --color-success:           #059669; /* Emerald */
   --color-success-light:     #ECFDF5;
+  --color-success-border:    #A7F3D0;
+  
   --color-warning:           #D97706; /* Amber */
   --color-warning-light:     #FFFBEB;
+  --color-warning-border:    #FDE68A;
+
   --color-danger:            #DC2626;
 
   /* Typography Colors */
-  --text-main:               #0F172A; /* Deep dark slate */
+  --text-main:               #0F172A;
   --text-secondary:          #334155;
   --text-muted:              #64748B;
   --text-subtle:             #94A3B8;
@@ -39,9 +43,10 @@
   /* Borders & Dividers */
   --border-color:            #E2E8F0;
   --border-subtle:           #F1F5F9;
+  --border-input:            #CBD5E1;
   --border-focus:            #2563EB;
 
-  /* Fonts */
+  /* Typography */
   --font-headline:           'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body:               'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono:               'JetBrains Mono', monospace;
@@ -50,15 +55,16 @@
   --radius-xs:               4px;
   --radius-sm:               6px;
   --radius-md:               10px;
-  --radius-lg:               14px;
-  --radius-xl:               18px;
+  --radius-lg:               12px;
+  --radius-xl:               16px;
   --radius-full:             9999px;
 
-  /* Shadows (Smooth & subtle) */
-  --shadow-sm:               0 1px 2px 0 rgba(15, 23, 42, 0.05);
-  --shadow-card:             0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 8px 24px -4px rgba(15, 23, 42, 0.06);
-  --shadow-card-hover:       0 8px 30px -4px rgba(15, 23, 42, 0.1), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
-  --shadow-popover:          0 12px 32px -4px rgba(15, 23, 42, 0.12);
+  /* Shadows (Smooth & natural) */
+  --shadow-xs:               0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --shadow-sm:               0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  --shadow-card:             0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 6px 16px -2px rgba(15, 23, 42, 0.05);
+  --shadow-card-hover:       0 10px 25px -4px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+  --shadow-dropdown:         0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 4px 10px -2px rgba(15, 23, 42, 0.05);
 }
 
 /* ============================================================
@@ -79,7 +85,7 @@ body {
   font-family: var(--font-body);
   background-color: var(--bg-page);
   color: var(--text-main);
-  line-height: 1.6;
+  line-height: 1.55;
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -95,7 +101,7 @@ h1, h2, h3, h4, h5, h6 {
 a {
   color: inherit;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 button {
@@ -120,7 +126,7 @@ button {
   z-index: 99999;
   opacity: 1;
   pointer-events: none;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
 .page-transition-overlay.hidden {
@@ -134,39 +140,43 @@ button {
 }
 
 /* ============================================================
-   Navigation Bar (Crisp White Floating)
+   Top Bar (Sharp, Full-Width, Rock-Solid Sticky Header)
    ============================================================ */
 .top-nav {
   position: fixed;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 2.5rem);
-  max-width: 1140px;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.94);
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+}
+
+.nav-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.65rem 1.25rem;
-  border-radius: var(--radius-full);
-  transition: all 0.25s ease;
-}
-
-.top-nav:hover {
-  border-color: #CBD5E1;
-  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.08);
+  gap: 1.5rem;
 }
 
 .brand-wrapper {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.65rem;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .brand-icon {
@@ -177,6 +187,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
 }
 
 .brand-icon svg {
@@ -200,31 +211,34 @@ button {
 }
 
 .brand-tag {
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-size: 0.675rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   color: var(--color-slate-600);
   background: var(--bg-surface-subtle);
   border: 1px solid var(--border-color);
-  padding: 0.15rem 0.45rem;
+  padding: 0.2rem 0.5rem;
   border-radius: var(--radius-xs);
-  margin-left: 0.5rem;
+  margin-left: 0.6rem;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
 .nav-link {
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-slate-600);
-  padding: 0.45rem 0.9rem;
-  border-radius: var(--radius-full);
-  transition: all 0.2s ease;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .nav-link:hover {
@@ -235,36 +249,44 @@ button {
 .nav-link.active {
   color: var(--color-primary);
   background: var(--color-primary-light);
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 .nav-cta {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: var(--color-primary);
+  background: var(--color-slate-900);
   color: #FFFFFF;
   font-weight: 600;
   font-size: 0.85rem;
-  padding: 0.5rem 1.15rem;
-  border-radius: var(--radius-full);
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
-  transition: all 0.2s ease;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+  transition: all 0.15s ease;
+  white-space: nowrap;
 }
 
 .nav-cta:hover {
-  background: var(--color-primary-dark);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
-  transform: translateY(-1px);
+  background: var(--color-primary);
   color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.25);
 }
 
 /* ============================================================
    Hero Section
    ============================================================ */
 .hero-section {
-  padding: 8rem 1.5rem 3.5rem;
-  max-width: 1100px;
+  padding: 6.5rem 1.5rem 3rem;
+  max-width: 1040px;
   margin: 0 auto;
   text-align: center;
 }
@@ -272,16 +294,16 @@ button {
 .hero-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   background: #FFFFFF;
   border: 1px solid var(--border-color);
-  padding: 0.35rem 0.9rem;
+  padding: 0.3rem 0.85rem;
   border-radius: var(--radius-full);
-  font-size: 0.8rem;
+  font-size: 0.775rem;
   font-weight: 600;
   color: var(--color-slate-700);
-  margin-bottom: 1.5rem;
-  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-xs);
 }
 
 .hero-pill .dot {
@@ -292,13 +314,13 @@ button {
 }
 
 .hero-title {
-  font-size: clamp(2.4rem, 5vw, 3.75rem);
+  font-size: clamp(2.3rem, 4.5vw, 3.5rem);
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.035em;
   color: var(--color-slate-900);
-  margin-bottom: 1.25rem;
-  max-width: 900px;
+  margin-bottom: 1.15rem;
+  max-width: 860px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -308,10 +330,10 @@ button {
 }
 
 .hero-subtext {
-  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
   color: var(--color-slate-600);
-  max-width: 680px;
-  margin: 0 auto 2.25rem;
+  max-width: 640px;
+  margin: 0 auto 2rem;
   line-height: 1.6;
 }
 
@@ -319,57 +341,57 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
-  margin-bottom: 3.5rem;
+  margin-bottom: 3rem;
 }
 
 .btn-primary-hero {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   background: var(--color-slate-900);
   color: #FFFFFF;
   font-weight: 600;
-  font-size: 0.975rem;
-  padding: 0.8rem 1.75rem;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.65rem;
   border-radius: var(--radius-md);
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
-  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+  transition: all 0.15s ease;
 }
 
 .btn-primary-hero:hover {
   background: var(--color-primary);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
 .btn-secondary-hero {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   background: #FFFFFF;
   color: var(--color-slate-700);
   font-weight: 600;
-  font-size: 0.975rem;
-  padding: 0.8rem 1.5rem;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.4rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.2s ease;
+  box-shadow: var(--shadow-xs);
+  transition: all 0.15s ease;
 }
 
 .btn-secondary-hero:hover {
   background: var(--bg-surface-subtle);
   color: var(--color-slate-900);
-  border-color: #CBD5E1;
+  border-color: var(--color-slate-300);
 }
 
 /* ============================================================
-   Interactive Hero Showcase Widget
+   Interactive Hero Showcase Card (Reworked & Sharp)
    ============================================================ */
 .hero-showcase {
-  max-width: 900px;
+  max-width: 860px;
   margin: 0 auto;
   background: #FFFFFF;
   border: 1px solid var(--border-color);
@@ -394,30 +416,33 @@ button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 0.925rem;
   font-weight: 700;
-  color: var(--color-slate-800);
+  color: var(--color-slate-900);
 }
 
 .showcase-title .material-symbols-outlined {
   color: var(--color-primary);
-  font-size: 20px;
+  font-size: 19px;
 }
 
 .showcase-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   background: var(--color-success-light);
   color: var(--color-success);
-  border: 1px solid #A7F3D0;
+  border: 1px solid var(--color-success-border);
   font-size: 0.75rem;
   font-weight: 600;
-  padding: 0.2rem 0.6rem;
+  padding: 0.2rem 0.55rem;
   border-radius: var(--radius-full);
 }
 
 .showcase-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
 @media (max-width: 768px) {
@@ -431,17 +456,35 @@ button {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   padding: 0.85rem 1rem;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.showcase-stat-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background 0.15s ease;
+}
+
+.showcase-stat-box:hover::before {
+  background: var(--color-primary);
 }
 
 .showcase-stat-box:hover {
   background: #FFFFFF;
   border-color: var(--color-primary-border);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-xs);
+  transform: translateY(-1px);
 }
 
 .stat-label {
-  font-size: 0.725rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-slate-500);
@@ -450,7 +493,7 @@ button {
 }
 
 .stat-value {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--color-slate-900);
 }
@@ -460,23 +503,40 @@ button {
 }
 
 /* ============================================================
-   Metrics Ribbon
+   Metrics Ribbon (Reworked & Sharp Card)
    ============================================================ */
 .metrics-ribbon {
-  max-width: 1000px;
-  margin: 3rem auto 4.5rem;
-  padding: 1.5rem 2rem;
+  max-width: 960px;
+  margin: 2.5rem auto 4rem;
+  padding: 1.5rem 1rem;
   background: #FFFFFF;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
   box-shadow: var(--shadow-card);
 }
 
 .metric-item {
   text-align: center;
+  position: relative;
+  padding: 0.25rem 1rem;
+}
+
+.metric-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background: var(--border-color);
+}
+
+@media (max-width: 768px) {
+  .metric-item:not(:last-child)::after {
+    display: none;
+  }
 }
 
 .metric-number {
@@ -490,117 +550,137 @@ button {
 }
 
 .metric-text {
-  font-size: 0.825rem;
+  font-size: 0.8rem;
   color: var(--color-slate-500);
+  font-weight: 500;
+}
   font-weight: 500;
 }
 
 /* ============================================================
-   Architecture & Features Section
+   Architecture & Feature Cards (Reworked & Sharp)
    ============================================================ */
 .section-wrapper {
-  max-width: 1100px;
+  max-width: 1040px;
   margin: 0 auto;
-  padding: 3.5rem 1.5rem;
+  padding: 3rem 1.5rem;
 }
 
 .section-tag {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.725rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .section-title {
-  font-size: clamp(1.85rem, 3vw, 2.5rem);
+  font-size: clamp(1.75rem, 2.75vw, 2.35rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--color-slate-900);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.65rem;
 }
 
 .section-desc {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--color-slate-600);
-  max-width: 620px;
-  margin-bottom: 2.75rem;
+  max-width: 580px;
+  margin-bottom: 2.5rem;
 }
 
 .architecture-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
 }
 
 .arch-card {
   background: #FFFFFF;
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 1.75rem 1.5rem;
-  transition: all 0.25s ease;
+  border-radius: var(--radius-lg);
+  padding: 1.65rem 1.5rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.arch-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background 0.2s ease;
 }
 
 .arch-card:hover {
   transform: translateY(-3px);
   border-color: #CBD5E1;
-  box-shadow: var(--shadow-card-hover);
+  box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.08);
+}
+
+.arch-card:hover::after {
+  background: var(--color-primary);
 }
 
 .arch-step-badge {
   position: absolute;
   top: 1.25rem;
   right: 1.25rem;
-  font-size: 0.7rem;
+  font-size: 0.675rem;
   font-weight: 700;
   color: var(--color-slate-500);
   background: var(--bg-surface-subtle);
   border: 1px solid var(--border-color);
-  padding: 0.15rem 0.45rem;
+  padding: 0.12rem 0.4rem;
   border-radius: var(--radius-xs);
 }
 
 .arch-icon-box {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-sm);
   background: var(--color-primary-light);
   border: 1px solid var(--color-primary-border);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   color: var(--color-primary);
 }
 
 .arch-icon-box .material-symbols-outlined {
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .arch-card-title {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
   color: var(--color-slate-900);
 }
 
 .arch-card-desc {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: var(--color-slate-600);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 /* ============================================================
-   CTA Card
+   CTA Card (Sharp & High Contrast)
    ============================================================ */
 .cta-banner {
-  max-width: 1000px;
-  margin: 3.5rem auto;
-  padding: 3rem 2rem;
+  max-width: 960px;
+  margin: 3rem auto;
+  padding: 2.75rem 2rem;
   background: var(--color-slate-900);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
@@ -609,22 +689,23 @@ button {
 }
 
 .cta-banner-title {
-  font-size: clamp(1.85rem, 3vw, 2.35rem);
+  font-size: clamp(1.75rem, 2.75vw, 2.25rem);
   font-weight: 800;
   color: #FFFFFF;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.65rem;
 }
 
 .cta-banner-desc {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: #94A3B8;
-  max-width: 600px;
-  margin: 0 auto 1.75rem;
+  max-width: 560px;
+  margin: 0 auto 1.5rem;
 }
 
 .cta-banner .btn-primary-hero {
   background: #FFFFFF;
   color: var(--color-slate-900);
+  box-shadow: none;
 }
 
 .cta-banner .btn-primary-hero:hover {
@@ -638,47 +719,47 @@ button {
 .site-footer {
   border-top: 1px solid var(--border-color);
   background: #FFFFFF;
-  padding: 3.5rem 1.5rem 2rem;
-  margin-top: 5rem;
+  padding: 3rem 1.5rem 2rem;
+  margin-top: 4.5rem;
 }
 
 .footer-inner {
-  max-width: 1100px;
+  max-width: 1040px;
   margin: 0 auto;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 2.5rem;
-  margin-bottom: 2.5rem;
+  gap: 2.25rem;
+  margin-bottom: 2.25rem;
 }
 
 .footer-desc {
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   color: var(--color-slate-600);
-  max-width: 320px;
-  line-height: 1.6;
+  max-width: 300px;
+  line-height: 1.55;
 }
 
 .footer-heading {
-  font-size: 0.8rem;
+  font-size: 0.775rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-slate-900);
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
 }
 
 .footer-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
 .footer-link {
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   color: var(--color-slate-600);
   transition: all 0.15s ease;
 }
@@ -691,12 +772,12 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 1.75rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--border-subtle);
-  font-size: 0.825rem;
+  font-size: 0.8rem;
   color: var(--color-slate-500);
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 /* Responsive adjustments */
@@ -709,18 +790,29 @@ button {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .top-nav {
-    width: calc(100% - 1.5rem);
-    padding: 0.5rem 0.85rem;
+    height: 58px;
   }
+  .nav-inner {
+    padding: 0 1rem;
+  }
+  .nav-links {
+    display: none; /* Mobile menu can toggle or simplify */
+  }
+  .hero-section {
+    padding-top: 5.5rem;
+  }
+}
+
+@media (max-width: 600px) {
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 1.75rem;
+    gap: 1.5rem;
   }
   .metrics-ribbon {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1rem;
   }
   .hero-actions {
     flex-direction: column;
