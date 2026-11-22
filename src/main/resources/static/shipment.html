@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Route Analysis &amp; Shipment Engine | visionIQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="shipment.css">
+</head>
+<body>
+  <div class="page-transition-overlay" id="page-transition"></div>
+
+  <!-- Navigation -->
+  <header class="top-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          vision<span class="iq-badge">IQ</span>
+          <span class="brand-tag">Freight Intelligence</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Overview</a>
+        <a href="index.html#architecture" class="nav-link">System Design</a>
+        <a href="shipment.html" class="nav-link active">Route Search</a>
+        <a href="compliance.html" class="nav-link">Compliance</a>
+        <a href="index.html" class="nav-cta">
+          <span class="material-symbols-outlined" style="font-size: 16px;">arrow_back</span>
+          Home Overview
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="content-wrapper">
+      <div class="hero-text">
+        <div class="hero-pill-badge">
+          <span class="material-symbols-outlined" style="font-size: 16px;">spatial_audio_off</span>
+          <span>Dual City &amp; Pincode Auto-Resolution (100+ Indian Hubs)</span>
+        </div>
+        <h1 class="hero-heading">
+          Configure Your <span class="hero-accent">Consignment Parameters</span>
+        </h1>
+        <p class="hero-subtext">
+          Select or search transit hubs across India. visionIQ executes spatial pre-filtering and Gemini reasoning in &lt;500ms.
+        </p>
+      </div>
+
+      <!-- Quick Route Preset Chips -->
+      <div class="quick-presets-container">
+        <div class="quick-presets-label">
+          <span class="material-symbols-outlined" style="font-size: 16px; color: #06B6D4;">bolt</span>
+          <span>Quick Route Benchmarks:</span>
+        </div>
+        <div class="preset-chips">
+          <button type="button" class="preset-chip flagship" onclick="applyPreset('Bhopal', '462001', 'Delhi', '110001', 'Other', 'Handmade Rajasthani Blue Pottery', true, false, 'BALANCED')">
+            <span class="material-symbols-outlined" style="font-size: 16px;">stars</span>
+            Bhopal → Delhi (Fragile Pottery Demo)
+          </button>
+          <button type="button" class="preset-chip" onclick="applyPreset('Mumbai', '400001', 'Bengaluru', '560001', 'Electronics', '', true, false, 'FASTEST')">
+            Mumbai → Bengaluru (Electronics)
+          </button>
+          <button type="button" class="preset-chip" onclick="applyPreset('Delhi', '110001', 'Kolkata', '700001', 'Commercial B2B & Bulk Freight', '', false, false, 'CHEAPEST')">
+            Delhi → Kolkata (Bulk Freight)
+          </button>
+          <button type="button" class="preset-chip" onclick="applyPreset('Ahmedabad', '380001', 'Jaipur', '302001', 'Cold Chain, Exim & Special Cargo', '', false, true, 'BALANCED')">
+            Ahmedabad → Jaipur (Cold Chain)
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Card -->
+      <div class="search-card">
+        <form class="search-form" id="routeForm" onsubmit="return false;">
+
+          <!-- Panel 01: Route Corridor -->
+          <div class="form-panel">
+            <div class="panel-header">
+              <div class="panel-tag">
+                <span class="material-symbols-outlined">alt_route</span>
+                <span>01. Route Corridor &amp; Hub Resolution</span>
+              </div>
+              <span class="panel-subtext">103 Mapped Hubs</span>
+            </div>
+
+            <!-- Origin & Destination Row with Autocomplete & Interactive Swap -->
+            <div class="route-inputs-wrapper">
+              <!-- Pickup Location -->
+              <div class="form-group flex-1">
+                <label class="form-label" for="originInput">
+                  <span class="material-symbols-outlined label-icon">trip_origin</span>
+                  Pickup Hub / Origin Pincode
+                </label>
+                <div class="input-container">
+                  <input class="form-input" id="originInput" placeholder="Type city or 6-digit pincode e.g. Bhopal or 462001" type="text" autocomplete="off" required>
+                  <span class="material-symbols-outlined input-prefix-icon">location_on</span>
+                  <input type="hidden" id="originPincode" value="">
+                  <input type="hidden" id="originCityName" value="">
+                </div>
+                <div class="autocomplete-dropdown" id="originDropdown"></div>
+              </div>
+
+              <!-- Interactive Swap Button -->
+              <button type="button" class="btn-swap-locations" onclick="swapLocations()" title="Swap Pickup and Delivery Hubs">
+                <span class="material-symbols-outlined">swap_horiz</span>
+              </button>
+
+              <!-- Delivery Location -->
+              <div class="form-group flex-1">
+                <label class="form-label" for="destInput">
+                  <span class="material-symbols-outlined label-icon">pin_drop</span>
+                  Delivery Destination / Pincode
+                </label>
+                <div class="input-container">
+                  <input class="form-input" id="destInput" placeholder="Type city or 6-digit pincode e.g. Delhi or 110001" type="text" autocomplete="off" required>
+                  <span class="material-symbols-outlined input-prefix-icon">near_me</span>
+                  <input type="hidden" id="destPincode" value="">
+                  <input type="hidden" id="destCityName" value="">
+                </div>
+                <div class="autocomplete-dropdown" id="destDropdown"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 02: Optimization Priority -->
+          <div class="form-panel">
+            <div class="panel-header">
+              <div class="panel-tag">
+                <span class="material-symbols-outlined">tune</span>
+                <span>02. Optimization Objective</span>
+              </div>
+              <span class="panel-subtext">Multi-Objective Matrix</span>
+            </div>
+
+            <div class="priority-cards-grid">
+              <div class="priority-card" data-priority="FASTEST" onclick="selectPriority('FASTEST')">
+                <span class="priority-badge">Air Priority</span>
+                <span class="material-symbols-outlined priority-icon">bolt</span>
+                <div class="priority-title">FASTEST</div>
+                <div class="priority-sub">Prioritizes Air &amp; High-Speed Road corridors</div>
+              </div>
+              <div class="priority-card selected" data-priority="BALANCED" onclick="selectPriority('BALANCED')">
+                <span class="priority-badge highlight">Recommended</span>
+                <span class="material-symbols-outlined priority-icon">balance</span>
+                <div class="priority-title">BALANCED</div>
+                <div class="priority-sub">Optimal equilibrium of speed, cost &amp; safety</div>
+              </div>
+              <div class="priority-card" data-priority="CHEAPEST" onclick="selectPriority('CHEAPEST')">
+                <span class="priority-badge">Surface &amp; Rail</span>
+                <span class="material-symbols-outlined priority-icon">savings</span>
+                <div class="priority-title">CHEAPEST</div>
+                <div class="priority-sub">Maximizes cost-efficiency via Rail &amp; Surface</div>
+              </div>
+            </div>
+            <input type="hidden" id="selectedPriority" value="BALANCED">
+          </div>
+
+          <!-- Panel 03: Cargo Classification -->
+          <div class="form-panel">
+            <div class="panel-header">
+              <div class="panel-tag">
+                <span class="material-symbols-outlined">inventory_2</span>
+                <span>03. Consignment Profile</span>
+              </div>
+              <span class="panel-subtext">Gemini Semantic AI</span>
+            </div>
+
+            <div class="cargo-categories-grid">
+              <div class="cargo-category-btn active" data-cargo="Electronics" onclick="selectCargo(this, 'Electronics')">
+                <span class="material-symbols-outlined">devices</span>
+                <span>Electronics</span>
+              </div>
+              <div class="cargo-category-btn" data-cargo="Commercial B2B & Bulk Freight" onclick="selectCargo(this, 'Commercial B2B & Bulk Freight')">
+                <span class="material-symbols-outlined">warehouse</span>
+                <span>Bulk Freight</span>
+              </div>
+              <div class="cargo-category-btn" data-cargo="Cold Chain, Exim & Special Cargo" onclick="selectCargo(this, 'Cold Chain, Exim & Special Cargo')">
+                <span class="material-symbols-outlined">ac_unit</span>
+                <span>Cold Chain</span>
+              </div>
+              <div class="cargo-category-btn" data-cargo="Machinery" onclick="selectCargo(this, 'Machinery')">
+                <span class="material-symbols-outlined">precision_manufacturing</span>
+                <span>Machinery</span>
+              </div>
+              <div class="cargo-category-btn" data-cargo="Food & Perishables" onclick="selectCargo(this, 'Food & Perishables')">
+                <span class="material-symbols-outlined">restaurant</span>
+                <span>Perishables</span>
+              </div>
+              <div class="cargo-category-btn" data-cargo="Other" onclick="selectCargo(this, 'Other')">
+                <span class="material-symbols-outlined">edit_note</span>
+                <span>Custom Cargo...</span>
+              </div>
+            </div>
+            <input type="hidden" id="selectedCargoType" value="Electronics">
+
+            <!-- Custom Gemini Cargo Classifier Input -->
+            <div class="custom-cargo-container" id="customCargoContainer" style="display: none;">
+              <div class="custom-cargo-header">
+                <div class="ai-reasoning-badge">
+                  <span class="material-symbols-outlined" style="font-size: 16px;">psychology</span>
+                  <span>Contextual Cargo Classifier (Gemini)</span>
+                </div>
+                <span style="font-size: 0.75rem; color: var(--color-slate-500);">Natural language input</span>
+              </div>
+              <div class="input-container">
+                <input class="form-input" id="customCargoInput" placeholder="Describe goods e.g. Handmade Rajasthani Blue Pottery" type="text" maxlength="80">
+                <span class="material-symbols-outlined input-prefix-icon">edit_note</span>
+              </div>
+              <div class="cargo-preset-pills">
+                <span style="font-size: 0.75rem; color: var(--color-slate-500); align-self: center;">Examples:</span>
+                <button type="button" class="cargo-preset-pill" onclick="setCustomCargo('Handmade Rajasthani Blue Pottery', true, false)">
+                  🏺 Handmade Rajasthani Blue Pottery
+                </button>
+                <button type="button" class="cargo-preset-pill" onclick="setCustomCargo('Liquid Nitrogen Cryogenic Flasks', true, true)">
+                  ❄️ Liquid Nitrogen Cryogenic Flasks
+                </button>
+                <button type="button" class="cargo-preset-pill" onclick="setCustomCargo('Solar Inverters & Lithium Cells', true, false)">
+                  ⚡ Solar Inverters &amp; Lithium Cells
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 04: Vulnerability & Special Handling Toggles -->
+          <div class="form-panel">
+            <div class="panel-header">
+              <div class="panel-tag">
+                <span class="material-symbols-outlined">security</span>
+                <span>04. Vulnerability &amp; Special Handling</span>
+              </div>
+              <span class="panel-subtext">Weather Telemetry Check</span>
+            </div>
+
+            <div class="form-row-toggles">
+              <label class="toggle-label">
+                <div class="toggle-switch">
+                  <input type="checkbox" id="fragileToggle" class="toggle-input">
+                  <span class="toggle-slider"></span>
+                </div>
+                <span class="toggle-text">Fragile Consignment (Shock dampening required)</span>
+              </label>
+
+              <label class="toggle-label">
+                <div class="toggle-switch">
+                  <input type="checkbox" id="perishableToggle" class="toggle-input">
+                  <span class="toggle-slider"></span>
+                </div>
+                <span class="toggle-text">Perishable Consignment (Temperature sensitive)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button class="btn-search" type="button" id="searchBtn" onclick="processSearch()">
+            <span>Search Shipping Routes</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </form>
+
+        <div class="trust-indicators">
+          <div class="trust-item">
+            <span class="material-symbols-outlined">verified</span>
+            <span>Carriage by Road Act 2007</span>
+          </div>
+          <div class="trust-item">
+            <span class="material-symbols-outlined">cloud_sync</span>
+            <span>OpenWeather Telemetry Integrated</span>
+          </div>
+          <div class="trust-item">
+            <span class="material-symbols-outlined">speed</span>
+            <span>Spatial Candidate Funnel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Script for Autocomplete, Presets & Navigation -->
+  <script>
+    let citiesData = [];
+
+    // Load cities.json
+    document.addEventListener("DOMContentLoaded", async () => {
+      setTimeout(() => {
+        const overlay = document.getElementById('page-transition');
+        if (overlay) overlay.classList.add('hidden');
+      }, 50);
+
+      try {
+        const res = await fetch('cities.json');
+        if (res.ok) {
+          citiesData = await res.json();
+          setupAutocomplete('originInput', 'originPincode', 'originCityName', 'originDropdown');
+          setupAutocomplete('destInput', 'destPincode', 'destCityName', 'destDropdown');
+        }
+      } catch (err) {
+        console.warn('Cities dataset could not be pre-loaded dynamically:', err);
+      }
+    });
+
+    function setupAutocomplete(inputId, pincodeId, cityNameId, dropdownId) {
+      const input = document.getElementById(inputId);
+      const hiddenPincode = document.getElementById(pincodeId);
+      const hiddenCity = document.getElementById(cityNameId);
+      const dropdown = document.getElementById(dropdownId);
+
+      input.addEventListener('input', () => {
+        const query = input.value.trim().toLowerCase();
+        if (query.length < 1) {
+          dropdown.classList.remove('open');
+          dropdown.innerHTML = '';
+          return;
+        }
+
+        const matches = citiesData.filter(c => 
+          c.city.toLowerCase().startsWith(query) ||
+          c.city.toLowerCase().includes(query) ||
+          c.pincode.startsWith(query)
+        ).slice(0, 7);
+
+        if (matches.length === 0) {
+          dropdown.classList.remove('open');
+          dropdown.innerHTML = '';
+          return;
+        }
+
+        dropdown.innerHTML = matches.map(c => `
+          <div class="autocomplete-item" onclick="selectCityItem('${inputId}', '${pincodeId}', '${cityNameId}', '${dropdownId}', '${c.city}', '${c.pincode}', '${c.state}')">
+            <div class="auto-city-info">
+              <span class="auto-city-name">${c.city}</span>
+              <span class="auto-city-state">${c.state}</span>
+            </div>
+            <span class="auto-pincode-badge">${c.pincode}</span>
+          </div>
+        `).join('');
+
+        dropdown.classList.add('open');
+      });
+
+      // Handle direct manual entry of 6-digit pincode
+      input.addEventListener('blur', () => {
+        setTimeout(() => {
+          dropdown.classList.remove('open');
+          const val = input.value.trim();
+          if (/^[1-9][0-9]{5}$/.test(val)) {
+            hiddenPincode.value = val;
+            const match = citiesData.find(c => c.pincode === val);
+            hiddenCity.value = match ? match.city : val;
+          } else if (val && !hiddenPincode.value) {
+            const match = citiesData.find(c => c.city.toLowerCase() === val.toLowerCase());
+            if (match) {
+              hiddenPincode.value = match.pincode;
+              hiddenCity.value = match.city;
+              input.value = `${match.city} (${match.pincode})`;
+            }
+          }
+        }, 200);
+      });
+    }
+
+    function swapLocations() {
+      const originInput = document.getElementById('originInput');
+      const destInput = document.getElementById('destInput');
+      const originPincode = document.getElementById('originPincode');
+      const destPincode = document.getElementById('destPincode');
+      const originCityName = document.getElementById('originCityName');
+      const destCityName = document.getElementById('destCityName');
+
+      const tempVal = originInput.value;
+      originInput.value = destInput.value;
+      destInput.value = tempVal;
+
+      const tempPin = originPincode.value;
+      originPincode.value = destPincode.value;
+      destPincode.value = tempPin;
+
+      const tempCity = originCityName.value;
+      originCityName.value = destCityName.value;
+      destCityName.value = tempCity;
+    }
+
+    function selectCityItem(inputId, pincodeId, cityNameId, dropdownId, city, pincode, state) {
+      document.getElementById(inputId).value = `${city} (${pincode})`;
+      document.getElementById(pincodeId).value = pincode;
+      document.getElementById(cityNameId).value = city;
+      const dropdown = document.getElementById(dropdownId);
+      dropdown.classList.remove('open');
+      dropdown.innerHTML = '';
+    }
+
+    function selectPriority(priority) {
+      document.getElementById('selectedPriority').value = priority;
+      document.querySelectorAll('.priority-card').forEach(card => {
+        card.classList.toggle('selected', card.getAttribute('data-priority') === priority);
+      });
+    }
+
+    function selectCargo(element, cargoVal) {
+      document.querySelectorAll('.cargo-category-btn').forEach(btn => btn.classList.remove('active'));
+      element.classList.add('active');
+      document.getElementById('selectedCargoType').value = cargoVal;
+
+      const customBox = document.getElementById('customCargoContainer');
+      if (cargoVal === 'Other') {
+        customBox.style.display = 'block';
+        document.getElementById('customCargoInput').focus();
+      } else {
+        customBox.style.display = 'none';
+      }
+    }
+
+    function setCustomCargo(text, isFragile, isPerishable) {
+      document.getElementById('customCargoInput').value = text;
+      document.getElementById('fragileToggle').checked = isFragile;
+      document.getElementById('perishableToggle').checked = isPerishable;
+    }
+
+    function applyPreset(originCity, originPin, destCity, destPin, cargo, customCargo, isFragile, isPerishable, priority) {
+      document.getElementById('originInput').value = `${originCity} (${originPin})`;
+      document.getElementById('originPincode').value = originPin;
+      document.getElementById('originCityName').value = originCity;
+
+      document.getElementById('destInput').value = `${destCity} (${destPin})`;
+      document.getElementById('destPincode').value = destPin;
+      document.getElementById('destCityName').value = destCity;
+
+      selectPriority(priority);
+
+      const targetCargoBtn = document.querySelector(`.cargo-category-btn[data-cargo="${cargo}"]`);
+      if (targetCargoBtn) {
+        selectCargo(targetCargoBtn, cargo);
+      }
+      if (cargo === 'Other' && customCargo) {
+        document.getElementById('customCargoInput').value = customCargo;
+      }
+
+      document.getElementById('fragileToggle').checked = isFragile;
+      document.getElementById('perishableToggle').checked = isPerishable;
+    }
+
+    function processSearch() {
+      let originPin = document.getElementById('originPincode').value.trim();
+      let originCity = document.getElementById('originCityName').value.trim();
+      let destPin = document.getElementById('destPincode').value.trim();
+      let destCity = document.getElementById('destCityName').value.trim();
+
+      // Fallback extraction from text inputs if user typed without clicking autocomplete
+      if (!originPin) {
+        const raw = document.getElementById('originInput').value.trim();
+        const pinMatch = raw.match(/^[1-9][0-9]{5}$/) || raw.match(/\(([1-9][0-9]{5})\)/);
+        if (pinMatch) {
+          originPin = pinMatch[1] || pinMatch[0];
+          originCity = raw.replace(/\([0-9]+\)/, '').trim();
+        } else {
+          const c = citiesData.find(item => item.city.toLowerCase() === raw.toLowerCase());
+          if (c) {
+            originPin = c.pincode;
+            originCity = c.city;
+          }
+        }
+      }
+
+      if (!destPin) {
+        const raw = document.getElementById('destInput').value.trim();
+        const pinMatch = raw.match(/^[1-9][0-9]{5}$/) || raw.match(/\(([1-9][0-9]{5})\)/);
+        if (pinMatch) {
+          destPin = pinMatch[1] || pinMatch[0];
+          destCity = raw.replace(/\([0-9]+\)/, '').trim();
+        } else {
+          const c = citiesData.find(item => item.city.toLowerCase() === raw.toLowerCase());
+          if (c) {
+            destPin = c.pincode;
+            destCity = c.city;
+          }
+        }
+      }
+
+      if (!originPin || !destPin) {
+        alert('Please specify valid origin and destination cities or 6-digit Indian pincodes.');
+        return;
+      }
+
+      const priority = document.getElementById('selectedPriority').value;
+      const cargo = document.getElementById('selectedCargoType').value;
+      const customCargo = document.getElementById('customCargoInput').value.trim();
+      const isFragile = document.getElementById('fragileToggle').checked;
+      const isPerishable = document.getElementById('perishableToggle').checked;
+
+      if (cargo === 'Other' && !customCargo) {
+        alert('Please provide a brief description for your custom goods type.');
+        document.getElementById('customCargoInput').focus();
+        return;
+      }
+
+      const effectiveCargo = (cargo === 'Other') ? customCargo : cargo;
+
+      const payload = {
+        origin: originPin,
+        originCity: originCity || originPin,
+        destination: destPin,
+        destCity: destCity || destPin,
+        cargoType: effectiveCargo,
+        rawCategory: cargo,
+        customCargoType: (cargo === 'Other') ? customCargo : null,
+        priority: priority,
+        fragile: isFragile,
+        perishable: isPerishable,
+        timestamp: new Date().toISOString()
+      };
+
+      // Store in session storage for visionIQ (and backwards compatibility)
+      sessionStorage.setItem('visioniqResult', JSON.stringify(payload));
+      sessionStorage.setItem('erlResult', JSON.stringify(payload));
+
+      // Visual Transition
+      const overlay = document.getElementById('page-transition');
+      if (overlay) {
+        overlay.classList.remove('hidden');
+        overlay.classList.add('active');
+      }
+
+      setTimeout(() => {
+        window.location.href = 'results.html';
+      }, 400);
+    }
+  </script>
+</body>
+</html>

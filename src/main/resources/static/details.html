@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Shipment Dossier &amp; Blueprint | visionIQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="details.css">
+</head>
+<body>
+  <div class="page-transition-overlay" id="page-transition"></div>
+
+  <!-- Navigation -->
+  <header class="top-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          vision<span class="iq-badge">IQ</span>
+          <span class="brand-tag">Freight Intelligence</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Overview</a>
+        <a href="results.html" class="nav-link">
+          <span class="material-symbols-outlined" style="font-size: 16px;">arrow_back</span>
+          Back to Results
+        </a>
+        <a href="compliance.html" class="nav-link">Compliance</a>
+        <a href="shipment.html" class="nav-cta">
+          <span class="material-symbols-outlined" style="font-size: 16px;">search</span>
+          New Search
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content" style="padding-top: 6.5rem;">
+    <div class="details-content">
+      
+      <div class="details-header">
+        <div class="route-pill" style="margin-bottom: 0.75rem;">
+          <span class="material-symbols-outlined">inventory_2</span>
+          <span id="routeLabel">Corridor Blueprint</span>
+        </div>
+        <h1 class="hero-title" style="font-size: clamp(1.85rem, 3.5vw, 2.5rem); margin-bottom: 0.5rem;">
+          Final Logistics <span class="accent-text">Shipment Dossier</span>
+        </h1>
+        <p class="hero-subtext" style="margin-bottom: 2rem;">
+          Review carrier specifications, corridor weather conditions, and transport parameters.
+        </p>
+      </div>
+
+      <!-- Two-Column Dossier Grid -->
+      <div class="details-grid">
+        
+        <!-- Left: Selected Carrier Specifications -->
+        <article class="details-card">
+          <div class="details-card-header">
+            <h2 class="details-card-title">
+              <span class="material-symbols-outlined">local_shipping</span>
+              Carrier Assessment Dossier
+            </h2>
+            <span id="carrierGradeBadge" class="carrier-grade-badge grade-A">Grade A</span>
+          </div>
+
+          <div class="details-list">
+            <div class="details-item">
+              <span class="details-item-label">Recommended Carrier</span>
+              <span class="details-item-val" style="color: var(--color-primary); font-weight: 700;" id="carrierName">—</span>
+            </div>
+            <div class="details-item">
+              <span class="details-item-label">Transport Mode</span>
+              <span class="details-item-val" id="carrierMode">—</span>
+            </div>
+            <div class="details-item">
+              <span class="details-item-label">Estimated Transit Duration</span>
+              <span class="details-item-val" id="carrierTransit">—</span>
+            </div>
+            <div class="details-item">
+              <span class="details-item-label">Benchmarked Freight Tariff</span>
+              <span class="details-item-val" style="color: var(--color-primary); font-weight: 700;" id="carrierCost">—</span>
+            </div>
+            <div class="details-item">
+              <span class="details-item-label">Vulnerability Risk Score</span>
+              <span class="details-item-val" id="carrierRisk">—</span>
+            </div>
+            <div class="details-item" style="flex-direction: column; align-items: flex-start; gap: 0.35rem; padding-top: 0.85rem;">
+              <span class="details-item-label">Recommendation Factors:</span>
+              <div style="background: var(--bg-surface-subtle); border: 1px solid var(--border-color); padding: 0.75rem; border-radius: var(--radius-sm); font-size: 0.825rem; color: var(--color-slate-700); line-height: 1.5; width: 100%;" id="carrierAiReason">
+                —
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Right: Consignment Parameters -->
+        <article class="details-card">
+          <div class="details-card-header">
+            <h2 class="details-card-title">
+              <span class="material-symbols-outlined">receipt_long</span>
+              Consignment Profile
+            </h2>
+            <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--color-slate-500);">VERIFIED</span>
+          </div>
+
+          <div class="details-list">
+            <div class="details-item">
+              <span class="details-item-label">Origin Hub</span>
+              <span class="details-item-val" id="shipOrigin">—</span>
+            </div>
+            <div class="details-item">
+              <span class="details-item-label">Destination Hub</span>
+              <span class="details-item-val" id="shipDestination">—</span>
+            </div>
+            <div class="details-item">
+              <span class="details-item-label">Cargo Classification</span>
+              <span class="details-item-val" style="color: var(--color-primary); font-weight: 700;" id="shipCargo">—</span>
+            </div>
+            <div class="details-item">
+              <span class="details-item-label">Priority Strategy</span>
+              <span class="details-item-val" id="shipPriority">BALANCED</span>
+            </div>
+            <div class="details-item">
+              <span class="details-item-label">Fragile Consignment</span>
+              <span class="details-item-val" id="shipFragile">No</span>
+            </div>
+            <div class="details-item">
+              <span class="details-item-label">Cold Chain / Perishable</span>
+              <span class="details-item-val" id="shipPerishable">No</span>
+            </div>
+            <div class="details-item">
+              <span class="details-item-label">Analysis Timestamp</span>
+              <span class="details-item-val" style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--text-subtle);" id="shipTimestamp">Live</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Step-by-Step Waypoint Roadmap -->
+      <section class="journey-timeline-card">
+        <div class="details-card-header">
+          <h2 class="details-card-title">
+            <span class="material-symbols-outlined">alt_route</span>
+            Corridor Waypoints &amp; Environmental Telemetry
+          </h2>
+          <span style="font-size: 0.75rem; color: #10B981; font-weight: 600;">Optimal Highway / Rail Corridor</span>
+        </div>
+
+        <div class="journey-stops-list" id="journeyStopsList">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- Actions Ribbon -->
+      <div class="details-actions">
+        <button class="btn-book" type="button" onclick="confirmBooking()">
+          <span class="material-symbols-outlined">check_circle</span>
+          Confirm Consignment Booking
+        </button>
+        <button class="btn-secondary-action" type="button" onclick="window.print()">
+          <span class="material-symbols-outlined">print</span>
+          Print Logistics Manifest
+        </button>
+        <a href="shipment.html" class="btn-secondary-action">
+          <span class="material-symbols-outlined">restart_alt</span>
+          Plan Another Route
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner" style="text-align: center;">
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+        © 2026 visionIQ — AI Multi-Modal Logistics Decision-Support Platform.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 1.5rem; font-size: 0.8rem; color: var(--text-subtle);">
+        <a href="privacy.html" class="footer-link">Privacy Policy</a>
+        <a href="terms.html" class="footer-link">Terms of Service</a>
+        <a href="compliance.html" class="footer-link">Transport Law &amp; CMVR</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const overlay = document.getElementById('page-transition');
+        if (overlay) overlay.classList.add('hidden');
+      }, 50);
+
+      const selectedCarrierRaw = sessionStorage.getItem('visioniqSelectedCarrier') || sessionStorage.getItem('erlSelectedCarrier');
+      const requestRaw = sessionStorage.getItem('visioniqResult') || sessionStorage.getItem('erlResult');
+
+      const carrier = selectedCarrierRaw ? JSON.parse(selectedCarrierRaw) : null;
+      const request = requestRaw ? JSON.parse(requestRaw) : null;
+
+      if (!request && !carrier) {
+        window.location.href = 'shipment.html';
+        return;
+      }
+
+      const origin = request ? (request.originCity || request.origin || 'Origin Hub') : 'Origin Hub';
+      const dest = request ? (request.destCity || request.destination || 'Destination Hub') : 'Destination Hub';
+
+      document.getElementById('routeLabel').textContent = `${origin} → ${dest}`;
+
+      // Populate Request Parameters
+      if (request) {
+        document.getElementById('shipOrigin').textContent = `${origin} (${request.origin || '—'})`;
+        document.getElementById('shipDestination').textContent = `${dest} (${request.destination || '—'})`;
+        document.getElementById('shipCargo').textContent = request.cargoType || 'General Cargo';
+        document.getElementById('shipPriority').textContent = request.priority || 'BALANCED';
+        document.getElementById('shipFragile').textContent = request.fragile ? 'Yes (Shock-Dampened)' : 'Standard';
+        document.getElementById('shipPerishable').textContent = request.perishable ? 'Yes (Temperature Monitored)' : 'No';
+        document.getElementById('shipTimestamp').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' IST';
+      }
+
+      // Populate Carrier Details
+      if (carrier) {
+        document.getElementById('carrierName').textContent = carrier.name || 'Verified Express Carrier';
+        document.getElementById('carrierMode').textContent = `${carrier.mode || 'Surface'} Transit`;
+        document.getElementById('carrierTransit').textContent = `${carrier.estimatedDays ?? 2} Business Days`;
+        document.getElementById('carrierCost').textContent = `₹${carrier.costPerKg ?? 45}/kg`;
+        document.getElementById('carrierRisk').textContent = `${carrier.riskScore ?? 15} / 100 (Safe)`;
+        document.getElementById('carrierAiReason').textContent = carrier.aiReason || 'Selected by Gemini reasoning engine as optimal choice for transit speed, cost trade-off, and low vibration.';
+        
+        const gradeBadge = document.getElementById('carrierGradeBadge');
+        if (gradeBadge) {
+          gradeBadge.textContent = `Grade ${carrier.safetyGrade || 'A'}`;
+        }
+      }
+
+      // Render Step-by-Step Waypoints
+      renderWaypoints(origin, dest, carrier ? carrier.mode : 'Road');
+    });
+
+    function renderWaypoints(origin, dest, mode) {
+      const container = document.getElementById('journeyStopsList');
+      
+      let intermediateHub = "Gwalior Transit Hub";
+      if (origin.includes("Mumbai") || dest.includes("Bengaluru")) intermediateHub = "Pune Intermediate Hub";
+      if (origin.includes("Delhi") || dest.includes("Kolkata")) intermediateHub = "Kanpur Freight Hub";
+      if (origin.includes("Bhopal") || dest.includes("Delhi")) intermediateHub = "Gwalior Corridor Hub";
+
+      container.innerHTML = `
+        <div class="journey-stop-item">
+          <div class="journey-stop-city">
+            <span>${origin}</span>
+            <span class="stop-weather-pill">🌤️ 26°C Clear</span>
+          </div>
+          <div class="journey-stop-meta">
+            <span>Consignment Ingestion &amp; Barcode Staging</span>
+            <span>•</span>
+            <span style="color: #10B981;">Day 0 • Check-in Completed</span>
+          </div>
+        </div>
+
+        <div class="journey-stop-item">
+          <div class="journey-stop-city">
+            <span>${intermediateHub}</span>
+            <span class="stop-weather-pill" style="color: #F59E0B; border-color: rgba(245, 158, 11, 0.3);">🌦️ 24°C Moderate Rain Alert</span>
+          </div>
+          <div class="journey-stop-meta">
+            <span>Regional Intermodal Sorting &amp; Corridor Cross-Docking</span>
+            <span>•</span>
+            <span style="color: #38BDF8;">Day 1 • In Transit (${mode})</span>
+          </div>
+        </div>
+
+        <div class="journey-stop-item">
+          <div class="journey-stop-city">
+            <span>${dest} Terminal</span>
+            <span class="stop-weather-pill">☀️ 28°C Optimal Delivery</span>
+          </div>
+          <div class="journey-stop-meta">
+            <span>Destination Hub Arrival, Last-Mile Distribution</span>
+            <span>•</span>
+            <span style="color: #A855F7;">Scheduled Final Handover</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function confirmBooking() {
+      alert('🎉 Consignment confirmed! Booking dossier generated with visionIQ tracking token: VIQ-' + Math.floor(100000 + Math.random() * 900000));
+    }
+  </script>
+</body>
+</html>
