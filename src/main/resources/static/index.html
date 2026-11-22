@@ -70,39 +70,69 @@
                 </a>
             </div>
 
-            <!-- Clean Showcase Widget -->
+            <!-- Distinct Hero Showcase Cockpit Card -->
             <div class="hero-showcase">
-                <div class="showcase-header">
-                    <div class="showcase-title">
-                        <span class="material-symbols-outlined">hub</span>
-                        <span>Corridor Benchmark: Bhopal (462001) → Delhi (110001)</span>
+                <div class="showcase-cockpit-bar">
+                    <div class="cockpit-status">
+                        <span class="pulse-beacon"></span>
+                        <span class="cockpit-title">Corridor Benchmark &amp; Telemetry Stream</span>
                     </div>
-                    <span class="showcase-badge">Execution Latency: &lt;500ms</span>
+                    <div class="cockpit-tags">
+                        <span class="cockpit-badge"><span class="material-symbols-outlined">bolt</span> &lt;500ms</span>
+                        <span class="cockpit-badge hub-badge"><span class="material-symbols-outlined">filter_alt</span> 103 → 4 Hubs</span>
+                    </div>
                 </div>
 
-                <div class="showcase-grid">
-                    <div class="showcase-stat-box">
-                        <div class="stat-label">Spatial Funnel</div>
-                        <div class="stat-value">
-                            <span class="stat-highlight">103 → 4</span> Hubs
+                <!-- Corridor Visual Track -->
+                <div class="showcase-corridor-track">
+                    <div class="track-node origin">
+                        <span class="track-dot"></span>
+                        <div class="track-info">
+                            <span class="track-label">Origin Transit Hub</span>
+                            <span class="track-name">Bhopal (462001)</span>
                         </div>
                     </div>
-                    <div class="showcase-stat-box">
-                        <div class="stat-label">Cargo Profiling</div>
-                        <div class="stat-value">
-                            <span class="stat-highlight">Fragile Art</span>
+                    <div class="track-line">
+                        <span class="track-mode-pill">
+                            <span class="material-symbols-outlined">flight</span>
+                            Air Express Corridor • 742 km
+                        </span>
+                    </div>
+                    <div class="track-node dest">
+                        <span class="track-dot"></span>
+                        <div class="track-info">
+                            <span class="track-label">Destination Terminal</span>
+                            <span class="track-name">Delhi (110001)</span>
                         </div>
                     </div>
-                    <div class="showcase-stat-box">
-                        <div class="stat-label">Live Weather Feed</div>
-                        <div class="stat-value">
-                            <span>Clear, 28°C</span>
+                </div>
+
+                <!-- Showcase Stat Metrics Grid -->
+                <div class="showcase-body">
+                    <div class="showcase-grid">
+                        <div class="showcase-stat-box stat-box-funnel">
+                            <div class="stat-label">Spatial Funnel</div>
+                            <div class="stat-value">
+                                <span class="stat-highlight">103 → 4</span> Hubs
+                            </div>
                         </div>
-                    </div>
-                    <div class="showcase-stat-box">
-                        <div class="stat-label">Optimal Recommendation</div>
-                        <div class="stat-value">
-                            <span class="stat-highlight">Air Express</span>
+                        <div class="showcase-stat-box stat-box-cargo">
+                            <div class="stat-label">Cargo Profiling</div>
+                            <div class="stat-value">
+                                <span>Fragile Ceramic</span>
+                            </div>
+                        </div>
+                        <div class="showcase-stat-box stat-box-weather">
+                            <div class="stat-label">Weather Telemetry</div>
+                            <div class="stat-value">
+                                <span>Clear, 28°C</span>
+                            </div>
+                        </div>
+                        <div class="showcase-stat-box stat-box-carrier">
+                            <div class="stat-label">Optimal Recommendation</div>
+                            <div class="stat-value">
+                                <span class="stat-highlight">Air Express</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -140,7 +170,7 @@
             </div>
 
             <div class="architecture-grid">
-                <div class="arch-card">
+                <div class="arch-card step-1">
                     <span class="arch-step-badge">STEP 01</span>
                     <div class="arch-icon-box">
                         <span class="material-symbols-outlined">explore</span>
@@ -151,7 +181,7 @@
                     </p>
                 </div>
 
-                <div class="arch-card">
+                <div class="arch-card step-2">
                     <span class="arch-step-badge">STEP 02</span>
                     <div class="arch-icon-box">
                         <span class="material-symbols-outlined">category</span>
@@ -162,7 +192,7 @@
                     </p>
                 </div>
 
-                <div class="arch-card">
+                <div class="arch-card step-3">
                     <span class="arch-step-badge">STEP 03</span>
                     <div class="arch-icon-box">
                         <span class="material-symbols-outlined">cloud_sync</span>
@@ -173,11 +203,16 @@
                     </p>
                 </div>
 
-                <div class="arch-card">
+                <div class="arch-card step-4">
                     <span class="arch-step-badge">STEP 04</span>
                     <div class="arch-icon-box">
                         <span class="material-symbols-outlined">tune</span>
                     </div>
+                    <h3 class="arch-card-title">Multi-Objective Carrier Ranking</h3>
+                    <p class="arch-card-desc">
+                        Scoring formulas balance Speed, Reliability, Cost, and Risk Factor to present transparent, explainable recommendations.
+                    </p>
+                </div>
                     <h3 class="arch-card-title">Multi-Objective Carrier Ranking</h3>
                     <p class="arch-card-desc">
                         Scoring formulas balance Speed, Reliability, Cost, and Risk Factor to present transparent, explainable recommendations.

@@ -83,50 +83,65 @@
       <div class="search-card">
         <form class="search-form" id="routeForm" onsubmit="return false;">
 
-          <!-- Origin & Destination Row with Autocomplete & Interactive Swap -->
-          <div class="route-inputs-wrapper">
-            <!-- Pickup Location -->
-            <div class="form-group flex-1">
-              <label class="form-label" for="originInput">
-                <span class="material-symbols-outlined label-icon">trip_origin</span>
-                Pickup Hub / Origin Pincode
-              </label>
-              <div class="input-container">
-                <input class="form-input" id="originInput" placeholder="Type city or 6-digit pincode e.g. Bhopal or 462001" type="text" autocomplete="off" required>
-                <span class="material-symbols-outlined input-prefix-icon">location_on</span>
-                <input type="hidden" id="originPincode" value="">
-                <input type="hidden" id="originCityName" value="">
+          <!-- Panel 01: Route Corridor -->
+          <div class="form-panel">
+            <div class="panel-header">
+              <div class="panel-tag">
+                <span class="material-symbols-outlined">alt_route</span>
+                <span>01. Route Corridor &amp; Hub Resolution</span>
               </div>
-              <div class="autocomplete-dropdown" id="originDropdown"></div>
+              <span class="panel-subtext">103 Mapped Hubs</span>
             </div>
 
-            <!-- Interactive Swap Button -->
-            <button type="button" class="btn-swap-locations" onclick="swapLocations()" title="Swap Pickup and Delivery Hubs">
-              <span class="material-symbols-outlined">swap_horiz</span>
-            </button>
-
-            <!-- Delivery Location -->
-            <div class="form-group flex-1">
-              <label class="form-label" for="destInput">
-                <span class="material-symbols-outlined label-icon">pin_drop</span>
-                Delivery Destination / Pincode
-              </label>
-              <div class="input-container">
-                <input class="form-input" id="destInput" placeholder="Type city or 6-digit pincode e.g. Delhi or 110001" type="text" autocomplete="off" required>
-                <span class="material-symbols-outlined input-prefix-icon">near_me</span>
-                <input type="hidden" id="destPincode" value="">
-                <input type="hidden" id="destCityName" value="">
+            <!-- Origin & Destination Row with Autocomplete & Interactive Swap -->
+            <div class="route-inputs-wrapper">
+              <!-- Pickup Location -->
+              <div class="form-group flex-1">
+                <label class="form-label" for="originInput">
+                  <span class="material-symbols-outlined label-icon">trip_origin</span>
+                  Pickup Hub / Origin Pincode
+                </label>
+                <div class="input-container">
+                  <input class="form-input" id="originInput" placeholder="Type city or 6-digit pincode e.g. Bhopal or 462001" type="text" autocomplete="off" required>
+                  <span class="material-symbols-outlined input-prefix-icon">location_on</span>
+                  <input type="hidden" id="originPincode" value="">
+                  <input type="hidden" id="originCityName" value="">
+                </div>
+                <div class="autocomplete-dropdown" id="originDropdown"></div>
               </div>
-              <div class="autocomplete-dropdown" id="destDropdown"></div>
+
+              <!-- Interactive Swap Button -->
+              <button type="button" class="btn-swap-locations" onclick="swapLocations()" title="Swap Pickup and Delivery Hubs">
+                <span class="material-symbols-outlined">swap_horiz</span>
+              </button>
+
+              <!-- Delivery Location -->
+              <div class="form-group flex-1">
+                <label class="form-label" for="destInput">
+                  <span class="material-symbols-outlined label-icon">pin_drop</span>
+                  Delivery Destination / Pincode
+                </label>
+                <div class="input-container">
+                  <input class="form-input" id="destInput" placeholder="Type city or 6-digit pincode e.g. Delhi or 110001" type="text" autocomplete="off" required>
+                  <span class="material-symbols-outlined input-prefix-icon">near_me</span>
+                  <input type="hidden" id="destPincode" value="">
+                  <input type="hidden" id="destCityName" value="">
+                </div>
+                <div class="autocomplete-dropdown" id="destDropdown"></div>
+              </div>
             </div>
           </div>
 
-          <!-- Priority Selection Cards -->
-          <div class="form-group">
-            <label class="form-label">
-              <span class="material-symbols-outlined label-icon">tune</span>
-              Optimization Priority
-            </label>
+          <!-- Panel 02: Optimization Priority -->
+          <div class="form-panel">
+            <div class="panel-header">
+              <div class="panel-tag">
+                <span class="material-symbols-outlined">tune</span>
+                <span>02. Optimization Objective</span>
+              </div>
+              <span class="panel-subtext">Multi-Objective Matrix</span>
+            </div>
+
             <div class="priority-cards-grid">
               <div class="priority-card" data-priority="FASTEST" onclick="selectPriority('FASTEST')">
                 <span class="priority-badge">Air Priority</span>
@@ -150,12 +165,16 @@
             <input type="hidden" id="selectedPriority" value="BALANCED">
           </div>
 
-          <!-- Cargo Categories & Custom Gemini AI Prompt -->
-          <div class="form-group">
-            <label class="form-label">
-              <span class="material-symbols-outlined label-icon">inventory_2</span>
-              Cargo Classification
-            </label>
+          <!-- Panel 03: Cargo Classification -->
+          <div class="form-panel">
+            <div class="panel-header">
+              <div class="panel-tag">
+                <span class="material-symbols-outlined">inventory_2</span>
+                <span>03. Consignment Profile</span>
+              </div>
+              <span class="panel-subtext">Gemini Semantic AI</span>
+            </div>
+
             <div class="cargo-categories-grid">
               <div class="cargo-category-btn active" data-cargo="Electronics" onclick="selectCargo(this, 'Electronics')">
                 <span class="material-symbols-outlined">devices</span>
@@ -212,23 +231,33 @@
             </div>
           </div>
 
-          <!-- Special Handling Toggles -->
-          <div class="form-row-toggles">
-            <label class="toggle-label">
-              <div class="toggle-switch">
-                <input type="checkbox" id="fragileToggle" class="toggle-input">
-                <span class="toggle-slider"></span>
+          <!-- Panel 04: Vulnerability & Special Handling Toggles -->
+          <div class="form-panel">
+            <div class="panel-header">
+              <div class="panel-tag">
+                <span class="material-symbols-outlined">security</span>
+                <span>04. Vulnerability &amp; Special Handling</span>
               </div>
-              <span class="toggle-text">Fragile Consignment (Shock dampening required)</span>
-            </label>
+              <span class="panel-subtext">Weather Telemetry Check</span>
+            </div>
 
-            <label class="toggle-label">
-              <div class="toggle-switch">
-                <input type="checkbox" id="perishableToggle" class="toggle-input">
-                <span class="toggle-slider"></span>
-              </div>
-              <span class="toggle-text">Perishable Consignment (Temperature sensitive)</span>
-            </label>
+            <div class="form-row-toggles">
+              <label class="toggle-label">
+                <div class="toggle-switch">
+                  <input type="checkbox" id="fragileToggle" class="toggle-input">
+                  <span class="toggle-slider"></span>
+                </div>
+                <span class="toggle-text">Fragile Consignment (Shock dampening required)</span>
+              </label>
+
+              <label class="toggle-label">
+                <div class="toggle-switch">
+                  <input type="checkbox" id="perishableToggle" class="toggle-input">
+                  <span class="toggle-slider"></span>
+                </div>
+                <span class="toggle-text">Perishable Consignment (Temperature sensitive)</span>
+              </label>
+            </div>
           </div>
 
           <!-- Submit Button -->

@@ -340,15 +340,24 @@
 
       filtered.forEach((carrier, idx) => {
         const card = document.createElement('div');
-        card.className = 'carrier-card';
+        const isRecommended = (idx === 0);
+        card.className = isRecommended ? 'carrier-card flagship-carrier-card' : 'carrier-card';
 
         const gradeClass = carrier.safetyGrade && carrier.safetyGrade.startsWith('A') 
           ? 'grade-A' 
           : (carrier.safetyGrade === 'B' ? 'grade-B' : 'grade-C');
 
-        const isRecommended = (idx === 0);
+        const rankBadge = isRecommended 
+          ? '<span style="color: var(--color-primary); font-weight:700;">★ Recommended Match</span>'
+          : (idx === 1 ? '<span style="color: var(--color-slate-600); font-weight:600;">Rank #2 Runner-Up</span>' : '<span style="color: var(--color-slate-500); font-weight:600;">Rank #3 Economy Surface</span>');
 
         card.innerHTML = `
+          ${isRecommended ? `
+            <div class="flagship-ribbon">
+              <span><span class="material-symbols-outlined" style="vertical-align: text-bottom; margin-right: 4px;">stars</span>AI TOP RECOMMENDATION • OPTIMAL CORRIDOR</span>
+              <span>MATCH SCORE 98%</span>
+            </div>
+          ` : ''}
           <div class="carrier-card-header">
             <div class="carrier-title-group">
               <div class="carrier-mode-icon">
@@ -356,7 +365,7 @@
               </div>
               <div>
                 <div class="carrier-name">${carrier.name}</div>
-                <div class="carrier-mode-badge">${carrier.mode} Freight ${isRecommended ? '• <span style="color: var(--color-primary); font-weight:600;">Recommended</span>' : ''}</div>
+                <div class="carrier-mode-badge">${carrier.mode} Freight • ${rankBadge}</div>
               </div>
             </div>
             <span class="carrier-grade-badge ${gradeClass}">Grade ${carrier.safetyGrade || 'A'}</span>

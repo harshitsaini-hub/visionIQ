@@ -266,14 +266,14 @@
   gap: 1.25rem;
 }
 
-/* Carrier Card */
+/* Carrier Card (Standard) */
 .carrier-card {
   background: #FFFFFF;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
   box-shadow: var(--shadow-card);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -281,9 +281,52 @@
 }
 
 .carrier-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   border-color: #CBD5E1;
-  box-shadow: 0 12px 24px -4px rgba(15, 23, 42, 0.08);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Flagship Carrier Card (Distinct Winner) */
+.carrier-card.flagship-carrier-card {
+  border: 1.5px solid #2563EB;
+  box-shadow: var(--shadow-featured);
+}
+
+.carrier-card.flagship-carrier-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 0 2px #2563EB, 0 8px 16px -2px rgba(37, 99, 235, 0.2), 0 28px 48px -8px rgba(15, 23, 42, 0.16);
+}
+
+.flagship-ribbon {
+  background: linear-gradient(90deg, #1D4ED8 0%, #2563EB 100%);
+  color: #FFFFFF;
+  font-size: 0.685rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.45rem 1.25rem;
+  margin: -1.5rem -1.5rem 1.15rem -1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flagship-ribbon .material-symbols-outlined {
+  font-size: 16px;
+  color: #FDE047;
+}
+
+.carrier-card.flagship-carrier-card .btn-select-carrier {
+  background: #2563EB;
+  color: #FFFFFF;
+  border-color: #2563EB;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+.carrier-card.flagship-carrier-card .btn-select-carrier:hover {
+  background: #1D4ED8;
+  border-color: #1D4ED8;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
 }
 
 .carrier-card-header {

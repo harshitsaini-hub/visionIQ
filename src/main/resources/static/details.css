@@ -29,9 +29,15 @@
 .details-card {
   background: #FFFFFF;
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
   box-shadow: var(--shadow-card);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.details-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .details-card-header {
