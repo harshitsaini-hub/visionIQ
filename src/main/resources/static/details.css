@@ -203,6 +203,27 @@
   transform: translateY(-1px);
 }
 
+.btn-print-manifest {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.925rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.btn-print-manifest:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
 .btn-secondary-action {
   display: inline-flex;
   align-items: center;
@@ -222,4 +243,277 @@
   background: var(--bg-surface-subtle);
   color: var(--color-slate-900);
   border-color: #CBD5E1;
+}
+
+/* Screen Mode: Hide Print Letterheads & Footers */
+.print-only {
+  display: none !important;
+}
+
+/* ============================================================
+   @media print — Official Indian Freight Waybill / Manifest
+   ============================================================ */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm 12mm 12mm;
+  }
+
+  *, *::before, *::after {
+    background: transparent !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    background: #FFFFFF !important;
+    color: #0F172A !important;
+    font-size: 9pt !important;
+    line-height: 1.4 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide interactive web chrome */
+  .top-nav,
+  .site-footer,
+  .details-actions,
+  .route-pill,
+  .page-transition-overlay,
+  .nav-links,
+  .brand-tag,
+  .hero-subtext {
+    display: none !important;
+  }
+
+  .main-content {
+    padding-top: 0 !important;
+    margin: 0 !important;
+  }
+
+  .details-content {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .details-header {
+    margin-bottom: 0.5rem !important;
+    text-align: left !important;
+  }
+
+  .details-header .hero-title {
+    font-size: 14pt !important;
+    margin-bottom: 0.15rem !important;
+    color: #0F172A !important;
+  }
+
+  /* Show official manifest letterhead */
+  .print-only {
+    display: block !important;
+  }
+
+  .print-manifest-header {
+    border-bottom: 2px solid #0F172A;
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .manifest-letterhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .manifest-brand-title {
+    font-size: 18pt;
+    font-weight: 900;
+    color: #0F172A !important;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+
+  .manifest-brand-sub {
+    font-size: 7pt;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #475569 !important;
+    text-transform: uppercase;
+  }
+
+  .manifest-meta-box {
+    text-align: right;
+    font-size: 7.2pt;
+    line-height: 1.45;
+    color: #1E293B !important;
+  }
+
+  .manifest-meta-box span {
+    font-family: monospace;
+    font-weight: 800;
+  }
+
+  .manifest-barcode-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.35rem;
+    padding-top: 0.35rem;
+    border-top: 1px dashed #CBD5E1;
+  }
+
+  .barcode-graphic {
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    font-size: 10pt;
+    font-weight: 900;
+  }
+
+  .barcode-caption {
+    font-size: 6.2pt;
+    font-weight: 700;
+    color: #64748B !important;
+    letter-spacing: 0.05em;
+  }
+
+  /* Compact 2-column print grid */
+  .details-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.65rem !important;
+    margin-bottom: 0.65rem !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .details-card {
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 4px !important;
+    padding: 0.65rem 0.85rem !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .details-card-header {
+    margin-bottom: 0.4rem !important;
+    padding-bottom: 0.3rem !important;
+    border-bottom: 1px solid #E2E8F0 !important;
+  }
+
+  .details-card-title {
+    font-size: 9.5pt !important;
+    font-weight: 800 !important;
+  }
+
+  .details-list {
+    gap: 0.3rem !important;
+  }
+
+  .details-item {
+    padding: 0.15rem 0 !important;
+    border-bottom: 1px dotted #E2E8F0 !important;
+    font-size: 8pt !important;
+  }
+
+  .details-item-val {
+    font-weight: 700 !important;
+  }
+
+  /* Compact Journey Waypoints for Print */
+  .journey-timeline-card {
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 4px !important;
+    padding: 0.65rem 0.85rem !important;
+    margin-bottom: 0.65rem !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .journey-stops-list {
+    gap: 0.45rem !important;
+    margin-top: 0.4rem !important;
+    padding-left: 1rem !important;
+  }
+
+  .journey-stop-item {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .journey-stop-city {
+    font-size: 8.5pt !important;
+    font-weight: 800 !important;
+  }
+
+  .journey-stop-meta {
+    font-size: 7.2pt !important;
+  }
+
+  .stop-weather-pill {
+    border: 1px solid #CBD5E1 !important;
+    padding: 0.05rem 0.3rem !important;
+    font-size: 6.8pt !important;
+  }
+
+  /* Manifest Statutory Footer & Signatures */
+  .print-manifest-footer {
+    margin-top: 0.75rem;
+    padding-top: 0.45rem;
+    border-top: 1.5px solid #0F172A;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .manifest-statutory-notice {
+    font-size: 6.5pt;
+    line-height: 1.35;
+    color: #334155 !important;
+    margin-bottom: 0.65rem;
+    text-align: justify;
+  }
+
+  .manifest-signatures-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .signature-box {
+    text-align: center;
+  }
+
+  .signature-line {
+    border-bottom: 1px dashed #0F172A;
+    height: 22px;
+    margin-bottom: 0.3rem;
+  }
+
+  .signature-label {
+    font-size: 6.8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .signature-hub {
+    font-size: 6.2pt;
+    color: #64748B !important;
+  }
+
+  .manifest-watermark-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 6.2pt;
+    font-weight: 700;
+    color: #94A3B8 !important;
+    border-top: 1px solid #E2E8F0;
+    padding-top: 0.25rem;
+    margin-top: 0.35rem;
+  }
 }
